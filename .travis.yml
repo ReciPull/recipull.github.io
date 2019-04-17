@@ -1,2 +1,6 @@
-language: java
+matrix:
+  include:
+    - language: java
+    - language: html
+    - language: css
 
