@@ -1,0 +1,16 @@
+apply plugin: 'application'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	testCompile 'junit:junit:4.12'
+}
+
+mainClassName = 'SimpleApp'
+
+tasks.withType(Test) {
+    scanForTestClasses = false
+    include "**/*Test.class" // whatever Ant pattern matches your test class files
+}
