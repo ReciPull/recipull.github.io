@@ -1,0 +1,15 @@
+Information Regarding AWS and Databases:
+- With free AWS account, 750 hours of Amazon RDS database and 25 GB of Amazon DynamoDB are available.
+- Amazon RDS
+  - Used for relational databases
+  - Secure and scalable
+  - Store data with pre-defined schema
+  - Uses MySQL or SQL Server
+  - https://aws.amazon.com/rds/
+- Amazon DynamoDB
+  - NoSQL database
+  - Serverless
+  - Used for key-value databases
+  - Works well with key-value pairs in large volumes 
+  - https://aws.amazon.com/dynamodb/
+  
