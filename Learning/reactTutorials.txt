@@ -1,0 +1,2 @@
+Reactjs Documentation - https://reactjs.org/docs/getting-started.html
+    - learning tictactoe tutorial for props/state management 
