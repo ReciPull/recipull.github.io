@@ -35,7 +35,12 @@ public class Recipe {
     public void addTag(String t){
         tags.put(t, true);
     }
+
     public int getNumIngr(){
         return numIngr;
+
+    public TreeMap<String,Integer> returnIngr(){
+        return ingredients;
+
     }
 } 
