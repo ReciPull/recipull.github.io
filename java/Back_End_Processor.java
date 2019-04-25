@@ -18,7 +18,8 @@ public class Back_End_Processor{
         db.getConnection("name");
         TreeMap<Recipe, Integer> recMap = db.getData();
 
-        List<Recipe> hits, one_Off;
+        List<Recipe> hits, one_Off; //List that hold Recipes that matches the user inputted ingredeints
+                                    //along with a list that holds recipes that are close
         for(Map.Entry<Recipe,Integer> entry : recMap.entrySet()) {
             Recipe r = entry.getKey();
             TreeMap<String, Integer> ingredients = r.returnIngr();
