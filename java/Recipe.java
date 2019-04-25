@@ -5,6 +5,7 @@ public class Recipe {
     private String name;
     private String description;
     private TreeMap<String, Integer> ingredients;
+    private int numIngr = ingredients.size();
     private int time;
     private int freq;
     private HashMap<String, Boolean> tags;
@@ -33,5 +34,8 @@ public class Recipe {
     }
     public void addTag(String t){
         tags.put(t, true);
+    }
+    public int getNumIngr(){
+        return numIngr;
     }
 } 
