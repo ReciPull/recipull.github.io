@@ -5,7 +5,7 @@ public class sqlTest {
     public static void main(String[] args) {
         try {
             String myDriver = "com.mysql.jdbc.Driver";
-            String myURL = "jdbc:mysql://localhost:3306/recipull_rds_db";
+            String myURL = "jdbc:mysql://mysql-recipull.crcqvo2k4dml.us-west-2.rds.amazonaws.com:3306/recipull_rds_db";
             Class.forName(myDriver);
             Connection conn = DriverManager.getConnection(myURL,"cs48_ajara","ajara2019");
 
