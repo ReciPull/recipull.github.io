@@ -1,11 +1,11 @@
 import java.util.TreeMap;
 import java.util.HashMap;
 
-public class Recipe {
+public class Recipe implements Comparable<Recipe>{
     private String name;
     private String description;
     private TreeMap<String, Integer> ingredients;
-    private int numIngr = ingredients.size();
+    private int numIngr;
     private int time;
     private int freq;
     private HashMap<String, Boolean> tags;
@@ -38,9 +38,19 @@ public class Recipe {
 
     public int getNumIngr(){
         return numIngr;
+    }
 
     public TreeMap<String,Integer> returnIngr(){
         return ingredients;
+    }
 
+    public void printOutput() {
+        System.out.println("Recipe Name: " + name);
+        System.out.println("Description: " + description);
+    }
+
+    public int compareTo(Recipe other){
+        int n = this.name.compareTo(other.name);
+        return n;
     }
 } 
