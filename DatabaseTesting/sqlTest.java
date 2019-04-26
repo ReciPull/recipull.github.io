@@ -8,7 +8,7 @@ public class sqlTest {
             String myURL = "jdbc:mysql://mysql-recipull.crcqvo2k4dml.us-west-2.rds.amazonaws.com:3306/recipull_rds_db";
             Class.forName(myDriver);
             Connection conn = DriverManager.getConnection(myURL,"cs48_ajara","ajara2019");
-
+            
             String query = "SELECT * FROM recipull_rds_db.ingredients";
 
             Statement st = conn.createStatement();
