@@ -13,3 +13,6 @@ Information Regarding AWS and Databases:
   - Works well with key-value pairs in large volumes 
   - https://aws.amazon.com/dynamodb/
   
+- AWS RDS Set-Up and Delete mySQL DB
+  - https://aws.amazon.com/getting-started/tutorials/create-mysql-db/
+  - COMPLETED
