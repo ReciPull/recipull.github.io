@@ -1,0 +1,5 @@
+tutorial for connecting to webpage:
+https://blog.prototypr.io/using-voice-commands-to-control-a-website-with-amazon-echo-alexa-part-1-6-a35edbfef405
+
+Created a dummy Alexa skill - invocation "Alexa open color picker"
+https://github.com/alexa/skill-sample-python-colorpicker/blob/master/instructions/1-voice-user-interface.md
