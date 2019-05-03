@@ -29,7 +29,6 @@ public class getRecipeFromIngList {
 
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
-            //int ingredientId = 0;
             ArrayList<Integer> ing = new ArrayList<Integer>();
             String ingIdList = "";
             int counter = 0;
@@ -45,9 +44,6 @@ public class getRecipeFromIngList {
 
             if(ing.size() > 0)
                 ingIdList = ingIdList.substring(0, ingIdList.length()-2);
-
-
-            // maybe take the first array and compare using an inner loop, use an arraylist of arraylists to check all other arrays
 
             String query2 = "SELECT pivot.recipe_id FROM pivot WHERE ingredient_id IN ("+ingIdList+");";
 
@@ -89,6 +85,11 @@ public class getRecipeFromIngList {
             }
             if(successRecipes > 0)
                 finalRecipes = finalRecipes.substring(0, finalRecipes.length()-2);
+            if(successRecipes == 0) {
+                System.out.println("No recipes containing all "+numIng+" ingredients found.");
+                s.close();
+                return;
+            }
             
             String query3 = "SELECT recipes.recipe_name, recipes.recipe_tags, recipes.recipe_vote FROM recipes WHERE recipes.recipe_id IN ("+finalRecipes+");";
 
