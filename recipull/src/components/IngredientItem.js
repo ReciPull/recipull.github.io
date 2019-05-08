@@ -27,6 +27,6 @@ const btnStyle = {
 }
 
 const itemStyle = {
-    backgroundColor: '#f4f4f4'
+    backgroundColor: '#28948B'
 }
 export default IngredientItem

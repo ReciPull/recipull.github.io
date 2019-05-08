@@ -48,54 +48,33 @@ a {
   text-decoration: none;
 }
 
-.container {
-  padding: 0 1rem;
+.IngredientSector {
+
+  width: 25%;
+  padding-top: 20px;
+  float: left;
+}
+.CardSector {
+  width: 75%;
+  float: right;
 }
 
-.searchSection
-{
-  width: 50%;
-  height: 500px;
-  outline: 5px solid black;
-  position: relative;
-  
+.inLine {
+  display: inline-flex;
 }
 
-.ingredList
+.MainSectors
 {
   width: 100%;
-  height: px;
-  overflow-y: auto;
+  display: inline-flex;
 }
 
-.boxBot
+.TitleBar
 {
-  position: absolute;
-  width: 100%;
-  bottom:0
+  height: 125px;
+  background-color: #E43544;
 }
 
-.clearBtn
-{
-  position: absolute;
-  right: 0;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  margin-right: 1%;
-}
-
-
-.btn{
-  display:inline-block;
-  border:none;
-  background: #555;
-  color: #fff;
-  padding: 7px 20px;
-  cursor: pointer;
-
-}
-
-.btn:hover {
-  background: #666;
+.TitleBar img{
+  height: 125px;
 }

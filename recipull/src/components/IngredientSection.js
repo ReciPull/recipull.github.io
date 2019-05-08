@@ -3,6 +3,7 @@ import SearchBar from './SearchBar';
 import Ingredients from './Ingredients';
 import uuid from 'uuid'
 import { isAbsolute } from 'path';
+import './IngredientSection.css';
 
 class IngredientSection extends Component {
     state = {
@@ -28,7 +29,9 @@ class IngredientSection extends Component {
     render() {
         return (
             <div className='searchSection'>
-                <div className = 'boxtop'>
+            
+                <div className = 'boxTop'>
+                <h1>Ingredient List</h1>
                     <SearchBar addIngredient={this.addIngredient}/>
                 </div>
                 <div className= 'ingredList'>
