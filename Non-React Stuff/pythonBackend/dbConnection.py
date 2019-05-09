@@ -1,19 +1,27 @@
 import pymysql.cursors
 
-def getConnection():
+class dbConnection:
+    def __init__(self):
+        self.conn = pymysql.connect(host = 'mysql-recipull.crcqvo2k4dml.us-west-2.rds.amazonaws.com',
+                            user = 'cs48_ajara',
+                            password = 'ajara2019',
+                            db = 'recipull_rds_db',
+                            charset = 'utf8mb4',
+                            cursorclass = pymysql.cursors.DictCursor)
+'''def getConnection():
 
-    conn = pymysql.connect(host = 'mysql-recipull.crcqvo2k4dml.us-west-2.rds.amazonaws.com',
-                           user = 'cs48_ajara',
-                           password = 'ajara2019',
-                           db = 'recipull_rds_db',
-                           charset = 'utf8mb4',
-                           cursorclass = pymysql.cursors.DictCursor)
+        conn = pymysql.connect(host = 'mysql-recipull.crcqvo2k4dml.us-west-2.rds.amazonaws.com',
+                            user = 'cs48_ajara',
+                            password = 'ajara2019',
+                            db = 'recipull_rds_db',
+                            charset = 'utf8mb4',
+                            cursorclass = pymysql.cursors.DictCursor)
 
-    return conn
+        return conn
 
 conn = getConnection()
 
-print("connect successful!")
+#print("connect successful!")
 
 
 
@@ -31,4 +39,4 @@ def main():
         conn.close()
 
 if __name__ == "__main__":
-    main()
+    main()'''
