@@ -52,13 +52,18 @@ public class getRecipeFromIng {
             ResultSet rs3 = st3.executeQuery(query3);
 
             String recipeName = "";
+            ArrayList<String> recipeList = new ArrayList<String>();
 
             while (rs3.next()) {
                 recipeName = rs3.getString("recipe_name");
+                recipeList.add(recipeName);
 
                 // print the results
-                System.out.format("%s \n", recipeName);
+                //System.out.format("%s \n", recipeName);
             } 
+            for(int i = 0; i < recipeList.size(); i++) {
+                System.out.println(recipeList.get(i));
+            }
             st.close();
             st2.close();
             st3.close();
