@@ -1,5 +1,6 @@
 import React from 'react';
 import './Card.css';
+import { Z_FULL_FLUSH } from 'zlib';
 
 class CardHeader extends React.Component {
     render() {
@@ -28,14 +29,19 @@ class Button extends React.Component {
 class CardBody extends React.Component {
     render() {
         return (
-        <div className="card-body">
-            <p className="date">{this.props.date}</p>
-            
-            <h2>{this.props.title}</h2>
-            
-            <p className="body-content">{this.props.text}</p>
-            
-            <Button />
+        <div className="fullBody">
+            <div className="card-body">
+                <p className="date">{this.props.date}</p>
+                
+                <h2>{this.props.title}</h2>
+                
+                <p className="body-content">{this.props.text}</p>
+                
+                
+            </div>
+            <div className="linkButton">
+                <Button />
+            </div>
         </div>
         )
     }

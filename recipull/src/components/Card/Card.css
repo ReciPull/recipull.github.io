@@ -4,14 +4,17 @@ body, html {
 }
 
 .card {
-  width:280px;
-  height:300px;
+  width:30%;
+  height:50%;
   display: block;
   margin: 60px auto;
   box-shadow: 10px 5px 40px 20px darken(#341cac, 5%);
   transition: .25s;
   padding: 10px;
+  display: inline-block;
+  position: relative;
 }
+
 
 .card:hover {
     box-shadow: 10px 5px 40px 20px darken(#341cac, 10%);
@@ -27,12 +30,13 @@ body, html {
 
 
 .card-header {
-  height: 150px;
+  height: 50%;
   width: 100%;
   padding: 15px;
   width:100%;
   background-size:cover;
   color:#174949;
+  float: top;
 }
 
 .card-header--title {
@@ -41,11 +45,24 @@ body, html {
   margin: 0;
 }
 
+.fullBody
+{
+  height:100%;
+  
+}
+.linkButton
+{
+  background-color:#28948B;
+}
+
 .card-body {
   padding: 15px;
+  height: 50%;
+  width: 100%;
   background-color:#28948B;
   /* background-color:#F9FFFF; */
-  width:100%;
+
+  overflow-y: auto;
 }
 
 .date {
@@ -64,9 +81,13 @@ body, html {
   border: none;
   box-shadow: none;
   background-color:transparent;
-  color: blue;
+  color: #E43544;
   font-size: 15px;
   transition:.25s;
+  width:100%;
+  padding: 15px;
+
+  
 }
 
 i{
@@ -77,7 +98,7 @@ i{
 .designer-link {
   color:#fff;
   text-align:center;
-  fon-size: 12px;
+  font-size: 12px;
   text-decoration: none;
   display:block;
 }

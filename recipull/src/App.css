@@ -57,10 +57,12 @@ a {
 .CardSector {
   width: 75%;
   float: right;
+  overflow-x: auto;
+  display: inline-flex;
 }
 
 .inLine {
-  display: inline-flex;
+  
 }
 
 .MainSectors
