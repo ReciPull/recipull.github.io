@@ -8,6 +8,10 @@ class dbConnection:
                             db = 'recipull_rds_db',
                             charset = 'utf8mb4',
                             cursorclass = pymysql.cursors.DictCursor)
+
+    def getIngFromRecipe(rname):
+        
+
 '''def getConnection():
 
         conn = pymysql.connect(host = 'mysql-recipull.crcqvo2k4dml.us-west-2.rds.amazonaws.com',
