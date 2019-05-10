@@ -9,10 +9,10 @@ def main():
         print("Q: quit program")
         c = input("Enter command: ")
         if(c == "R" or c == "r"):
-            r = input("Enter ingredient name: ")
+            i = input("Enter ingredient name: ")
             d.getRecipeFromIng(i)
         if(c == "I" or c == "i"):
-            i = input("Enter recipe name: ")
+            r = input("Enter recipe name: ")
             d.getIngFromRecipe(r)
         if(c == "Q" or c == "q"):
             break
