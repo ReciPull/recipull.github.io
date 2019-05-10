@@ -10,14 +10,12 @@ class dbConnection:
                             cursorclass = pymysql.cursors.DictCursor)
 
     def getIngFromRecipe(self, rname):
-        #recipeName = input("Enter a recipe name: ")
         try: 
             with self.conn.cursor() as cursor:
                 sql = "SELECT recipes.recipe_id FROM recipes WHERE recipe_name =%s"
                 cursor.execute(sql, rname)
                 recipeId = cursor.fetchone()
                 recipeId = int(recipeId['recipe_id'])
-                #print(recipeId)
             with self.conn.cursor() as cursor:
                 sql = "SELECT pivot.ingredient_id FROM pivot WHERE pivot.recipe_id = "+str(recipeId)+""
                 cursor.execute(sql)
@@ -26,10 +24,6 @@ class dbConnection:
                 while currIngId is not None:
                     ingIdList.append(int(currIngId['ingredient_id']))
                     currIngId = cursor.fetchone()
-                #print(ingIdList)
-                #l = len(ingIdList)
-                '''for i in ingIdList:
-                    i = str(i)'''
                 ingIdStr = "("
                 for i in ingIdList:
                     ingIdStr = ingIdStr+str(i)+", "
@@ -43,7 +37,35 @@ class dbConnection:
                     print(i['ingredient_name'])
         finally: 
             self.conn.close()
-
+    
+    def getRecipeFromIng(self,iname):
+        try: 
+            with self.conn.cursor() as cursor:
+                sql = "SELECT ingredients.ingredient_id FROM ingredients WHERE ingredient_name =%s"
+                cursor.execute(sql, iname)
+                ingId = cursor.fetchone()
+                ingId = int(ingId['ingredient_id'])
+            with self.conn.cursor() as cursor:
+                sql = "SELECT pivot.recipe_id FROM pivot WHERE pivot.ingredient_id = "+str(ingId)+""
+                cursor.execute(sql)
+                currRecId = cursor.fetchone()
+                recIdList = []
+                while currRecId is not None:
+                    recIdList.append(int(currRecId['recipe_id']))
+                    currRecId = cursor.fetchone()
+                recIdStr = "("
+                for i in recIdList:
+                    recIdStr = recIdStr+str(i)+", "
+                recIdStr = recIdStr[0:-2]
+                recIdStr = recIdStr + ")"
+            with self.conn.cursor() as cursor:
+                sql = "SELECT recipes.recipe_name FROM recipes WHERE recipes.recipe_id IN "+recIdStr+""
+                cursor.execute(sql)
+                recName = cursor.fetchall()
+                for i in recName:
+                    print(i['recipe_name'])
+        finally: 
+            self.conn.close()
 
 '''def getConnection():
 
