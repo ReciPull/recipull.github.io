@@ -229,7 +229,7 @@ public class Driver {
                 System.out.println(x.getURL()+"\n"+x.getImgURL());
                 System.out.println("---------------------------");
             }
-            updateVote(0, "grilled cheese");
+            updateVote(8, "grilled cheese");
             st.close();
             st2.close();
             st3.close();
