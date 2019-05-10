@@ -31,6 +31,9 @@ public class Recipe implements Comparable<Recipe>{
     public void addTag(String t){
         tags.put(t, true);
     }
+    public void setNumIngr(){
+        this.numIngr = ingredients.size();
+    }
 
     //getters
     public String getName() { return this.name; }

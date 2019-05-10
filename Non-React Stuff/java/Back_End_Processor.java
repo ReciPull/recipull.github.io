@@ -34,6 +34,7 @@ public class Back_End_Processor{
             one.addIngredient("Onions", 9);
             one.addIngredient("Garlic", 8);
             one.calculateFreq();
+            one.setNumIngr();
 
             two.setName("Potatoes, Onions, Garlic, and Chili Peppers");
             two.setDescription("Another description");
@@ -43,6 +44,7 @@ public class Back_End_Processor{
             two.addIngredient("Garlic", 8);
             two.addIngredient("Chili Peppers", 7);
             two.calculateFreq();
+            two.setNumIngr();
 
             three.setName("Potatoes, Onions, Garlic, Chili Peppers, and Mushrooms");
             three.setDescription("Another description again");
@@ -53,10 +55,11 @@ public class Back_End_Processor{
             three.addIngredient("Chili Peppers", 7);
             three.addIngredient("Mushrooms", 6);
             three.calculateFreq();
+            three.setNumIngr();
 
-            recMap.put(one, 3);
-            recMap.put(two, 4);
-            recMap.put(three, 5);
+            recMap.put(one, one.getNumIngr());
+            recMap.put(two, two.getNumIngr());
+            recMap.put(three, three.getNumIngr());
         }
 
         List<Recipe> hits = new ArrayList<Recipe>();
@@ -94,11 +97,35 @@ public class Back_End_Processor{
                 remainders.add(entry.getKey());
             }
         }
+
         System.out.println("Matches:");
-        hits.get(0).printOutput();
+        if(hits.size() != 0){
+            for(int i = 0; i < hits.size(); i++){
+                hits.get(i).printOutput();
+            }
+        }
+        else{
+            System.out.println("Oops, no matches! Try again");
+        }
+
         System.out.println("\nMissing just one ingredient:");
-        one_Off.get(0).printOutput();
+        if(one_Off.size() != 0){
+            for(int i = 0; i < one_Off.size(); i++){
+                one_Off.get(i).printOutput();
+            }
+        }
+        else{
+            System.out.println("Oops, no recipes that were missing just one ingredient! Try again");
+        }
+
         System.out.println("\nMissing a few ingredients:");
-        remainders.get(0).printOutput();
+        if(remainders.size() != 0){
+            for(int i = 0; i < remainders.size(); i++){
+                remainders.get(i).printOutput();
+            }
+        }
+        else{
+            System.out.println("Yay, all recipes were matches or close matches!");
+        }
     }
 }
