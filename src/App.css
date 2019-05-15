@@ -50,14 +50,16 @@ a {
 
 .IngredientSector {
 
+  position: fixed;
   width: 25%;
-  padding-top: 20px;
+  margin-top: 20px;
   float: left;
 }
 .CardSector {
   width: 75%;
+  margin-left: 25%;
   float: right;
-  overflow-x: auto;
+  /*overflow-x: auto;*/
   display: inline-flex;
 }
 
@@ -67,13 +69,18 @@ a {
 
 .MainSectors
 {
+  padding-top: 125px;
   width: 100%;
   display: inline-flex;
 }
 
 .TitleBar
 {
+  position:fixed;
+  top:0;
   height: 125px;
+  width: 100%;
+  z-index: 999;
   background-color: #E43544;
 }
 

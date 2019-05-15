@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ScaleText from "react-scale-text";
 
 export class SearchBar extends Component {
     state = {
@@ -19,7 +20,7 @@ export class SearchBar extends Component {
                 <input
                     type="test"
                     name="title"
-                    style={{flex: 10}}
+                    style={bar}
                     placeholder="Add Ingredient"
                     value={this.state.title}
                     onChange={this.onChange}
@@ -28,11 +29,20 @@ export class SearchBar extends Component {
                         type="submit"
                         value="Submit"
                         className="btn"
-                        style={{flex: 1}}
+                        style={sub}
                     />
             </form>
         )
     }
 }
 
+const bar = {
+    display: 'flex',
+    width: '75%'
+
+}
+const sub = {
+    display: 'flex',
+    width: '25%'
+}
 export default SearchBar
