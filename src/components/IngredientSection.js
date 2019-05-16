@@ -38,7 +38,11 @@ class IngredientSection extends Component {
                     <Ingredients ingredientList = {this.state.ingredientList} delIngredient={this.delIngredient}/>
                 </div>
                 <div className = 'boxBot'>
-                    <p style={tail}>Add Ingredients Here <button className = 'clearBtn' onClick={this.clearAll}> Clear All </button></p>
+                    <button className = 'SearchBtn'> Search Recipes </button>
+                    
+                </div>
+                <div className = 'clearSection'>
+                        <p style={tail}>Add Ingredients Here <button className = 'clearBtn' onClick={this.clearAll}> Clear All </button></p>
                 </div>
                 
             </div>
@@ -48,7 +52,8 @@ class IngredientSection extends Component {
 
 const tail = {
         backgroundColor: '#f4f4f4',
-        padding: "0px 5px"
+        height: 25,
+        display: 'flex', justifyContent: 'center', alignItems: 'center'
 }
 
 export default IngredientSection
