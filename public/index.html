@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <script src="https://use.fontawesome.com/f5ea91e308.js"></script>
+    <!--<script src="https://use.fontawesome.com/f5ea91e308.js"></script>-->
     <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -36,5 +36,39 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
+    <div id="ingredients" style="visibility:hidden;"></div>
+    <script src="jquery-3.4.1.min.js"></script>
+    <script>
+      $(document).ready(function(){
+        //var ourInfo = document.getElementById("ingredients").innerHTML;
+        //$("button[name='GetButton']").click(function(){
+        $("button[name='SearchBtn']").click(function(){
+          console.log(document.getElementById("ingredients").innerHTML);
+          $.ajax({
+            type: 'GET',
+            //url: 'http://csil-24.cs.ucsb.edu:8180/test/GetName',
+            url: 'http://localhost:8180/test/GetName',
+            //url: 'http://localhost:3000/test/GetName',
+            data: {  //send data here or remove this entire block
+              'ID': document.getElementById("ingredients").innerHTML, 
+            },
+            dataType: 'json', //return type
+            error: function() {
+              alert("GetName Error");
+            },
+            success: function(data){ 
+              var items = [];
+              $.each( data, function( key, val ) {
+              items.push( "<li>" + key + ":" + val + "</li>" );
+              });
+              $( "<ul/>", {
+                "class": "data_list",
+                html: items.join( "" )
+              }).appendTo( "body" );
+            }
+          });
+        });
+      });
+    </script>
   </body>
 </html>
