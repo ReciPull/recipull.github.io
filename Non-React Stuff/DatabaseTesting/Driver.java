@@ -166,7 +166,7 @@ public class Driver {
                 return;
             }
             
-            String query3 = "SELECT recipes.recipe_name, recipes.recipe_url, recipes.recipe_img_url, recipes.recipe_tags, recipes.recipe_vote, recipes.num_ingredients FROM recipes WHERE recipes.recipe_id IN ("+finalRecipes+");";
+            String query3 = "SELECT recipes.recipe_name, recipes.recipe_url, recipes.recipe_img_url, recipes.recipe_tags, recipes.recipe_vote, recipes.description, recipes.num_ingredients FROM recipes WHERE recipes.recipe_id IN ("+finalRecipes+");";
 
             Statement st3 = conn.createStatement();
             ResultSet rs3 = st3.executeQuery(query3);
@@ -175,6 +175,7 @@ public class Driver {
             String recipeURL = "";
             String recipeImgURL = "";
             String recipeTags = "";
+            String recipeDesc = "";
             int recipeVote = 0;
             int numIngIncluded = 0;
             ArrayList<Recipe> recipeList = new ArrayList<Recipe>();
@@ -197,6 +198,8 @@ public class Driver {
                 r.setVotes(recipeVote);
                 numIngIncluded = rs3.getInt("num_ingredients");
                 r.setNumIng(numIngIncluded);
+                recipeDesc = rs3.getString("description");
+                r.setDescription(recipeDesc);
                 recipeList.add(r);
 
                 // print the results
@@ -214,7 +217,7 @@ public class Driver {
 
             for(Recipe x : orderedRecipes) {
                 System.out.println(x.getNumIng()+":\t"+x.getName()+": "+x.getTags());
-                System.out.println(x.getURL()+"\n"+x.getImgURL());
+                System.out.println(x.getURL()+"\n"+x.getImgURL()+"\n"+x.getDesc());
                 System.out.println("---------------------------");
             }
 
@@ -226,7 +229,7 @@ public class Driver {
             System.out.println("AFTER FILTER: ");
             for(Recipe x : taggedRecipes) {
                 System.out.println(x.getNumIng()+":\t"+x.getName()+": "+x.getTags());
-                System.out.println(x.getURL()+"\n"+x.getImgURL());
+                System.out.println(x.getURL()+"\n"+x.getImgURL()+"\n"+x.getDesc());
                 System.out.println("---------------------------");
             }
             updateVote(8, "grilled cheese");

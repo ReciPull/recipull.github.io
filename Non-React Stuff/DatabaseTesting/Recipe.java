@@ -37,6 +37,7 @@ public class Recipe implements Comparable<Recipe>{
     public String getImgURL() { return imgUrl; }
     public int getVotes() { return votes; }
     public int getNumIng() { return numIng; }
+    public String getDesc() { return description; }
     public String getTags() {
         String tagNames = "";
         for(String x : this.tags.keySet()) {
