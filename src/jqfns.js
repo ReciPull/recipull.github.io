@@ -2,7 +2,8 @@ $(document).ready(function(){
   $("button[name='PostButton']").click(function(){
     $.ajax({
       type: 'POST',
-      url: 'http://localhost:8080/test/SaveName',
+      url: 'http://csil-24.cs.ucsb.edu:8180/test/SaveName',
+      //url: 'http://localhost:8080/test/SaveName',
       data: { 
         'name': 'Chandra', 
         'surName': 'Krintz' 
@@ -32,7 +33,8 @@ $(document).ready(function(){
     ];
     $.ajax({
       type: 'POST',
-      url: 'http://localhost:8080/test/SaveArray',
+      url: 'http://csil-24.cs.ucsb.edu:8180/test/SaveArray',
+      //url: 'http://localhost:8080/test/SaveArray',
       data: JSON.stringify(data_array),
       contentType: "application/json; charset=utf-8", //send type
       dataType: "json", //return type
@@ -62,10 +64,13 @@ $(document).ready(function(){
   });
   /////////////////////////////////////////////////
   var ourInfo = "flour:egg:salt";
-  $("button[name='GetButton']").click(function(){
+  //$("button[name='GetButton']").click(function(){
+  $("button[name='SearchBtn']").click(function(){
     $.ajax({
       type: 'GET',
-      url: 'http://localhost:8080/test/GetName',
+      //url: 'http://csil-24.cs.ucsb.edu:8180/test/GetName',
+      url: 'http://localhost:8180/test/GetName',
+      //url: 'http://localhost:3000/test/GetName',
       data: {  //send data here or remove this entire block
         'ID': ourInfo, 
       },

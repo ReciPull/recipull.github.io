@@ -26,6 +26,17 @@ class IngredientSection extends Component {
         this.setState({ingredientList: []})
     }
 
+    // onClick = (e) => {
+    //     var s = new String("");
+    //     this.state.ingredientList.map((ingredient) => (
+    //         s=s+ingredient.title,
+    //         s=s+":"
+    //     ));
+    //     s = s.substring(0,s.length-1);
+    //     console.log(s); 
+    //     document.getElementById("ingredients").innerHTML = s;
+    // }
+
     render() {
         return (
             <div className='searchSection'>
@@ -38,7 +49,7 @@ class IngredientSection extends Component {
                     <Ingredients ingredientList = {this.state.ingredientList} delIngredient={this.delIngredient}/>
                 </div>
                 <div className = 'boxBot'>
-                    <button className = 'SearchBtn'> Search Recipes </button>
+                    <button onClick={this.onClick} name = 'SearchBtn' className = 'SearchBtn'> Search Recipes </button>
                     
                 </div>
                 <div className = 'clearSection'>

@@ -29,13 +29,15 @@ public class GetName extends HttpServlet {
                 finVals += "'"+vals[i]+"', ";
             }
         }
-        System.out.println("GET request, ID: "+finVals);
-        retVal.addProperty("prop1", "property1val");
-        retVal.addProperty("prop2", "property2val");
+        Driver d = new Driver();
+        String s = d.run(finVals);
+        System.out.println(s);
+        //System.out.println("GET request, ID: "+finVals);
+        retVal.addProperty(s, "final list");
+        //retVal.addProperty("prop2", "property2val");
         try {
             //output = retVal.toString();
             response.setStatus(HttpServletResponse.SC_OK);
- 
         } catch (Exception ex) {
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
  

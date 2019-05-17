@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ScaleText from "react-scale-text";
+//import ScaleText from "react-scale-text";
 
 export class SearchBar extends Component {
     state = {
@@ -9,6 +9,19 @@ export class SearchBar extends Component {
     onSubmit = (e) => {
         e.preventDefault();
         this.props.addIngredient(this.state.title);
+        var s = new String("");
+        // this.props.ingredientList.map((ingredient) => (
+        //     s=s+ingredient.title,
+        //     s=s+":"
+        // ));
+        // s = s.substring(0,s.length-1);
+
+        var t = this.state.title;
+        // console.log(s); 
+        
+        s = document.getElementById("ingredients").innerHTML + t+":";
+        document.getElementById("ingredients").innerHTML = s;
+        console.log(document.getElementById("ingredients").innerHTML);
         this.setState({ title: ''});
     }
 
