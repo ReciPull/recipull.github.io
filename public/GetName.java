@@ -30,10 +30,10 @@ public class GetName extends HttpServlet {
             }
         }
         Driver d = new Driver();
-        d.run(finVals);
-        System.out.println("GET request, ID: "+finVals);
-        retVal.addProperty("prop1", "property1val");
-        retVal.addProperty("prop2", "property2val");
+        String s = d.run(finVals);
+        //System.out.println("GET request, ID: "+finVals);
+        retVal.addProperty(s, "final value");
+        //retVal.addProperty("prop2", "property2val");
         try {
             //output = retVal.toString();
             response.setStatus(HttpServletResponse.SC_OK);

@@ -76,7 +76,7 @@ public class Driver {
         }
     }
 
-    public void run(String ingredients) {
+    public String run(String ingredients) {
         try {
             String myDriver = "com.mysql.jdbc.Driver";
             String myURL = "jdbc:mysql://mysql-recipull.crcqvo2k4dml.us-west-2.rds.amazonaws.com:3306/recipull_rds_db";
@@ -165,7 +165,7 @@ public class Driver {
             if(successRecipes == 0) {
                 System.out.println("No recipes containing all "+numIng+" ingredients found.");
                 s.close();
-                return;
+                return "No Recipes";
             }
             
             String query3 = "SELECT recipes.recipe_name, recipes.recipe_url, recipes.recipe_img_url, recipes.recipe_tags, recipes.recipe_vote, recipes.description, recipes.num_ingredients FROM recipes WHERE recipes.recipe_id IN ("+finalRecipes+");";
@@ -217,31 +217,35 @@ public class Driver {
                 }
             }
 
-            for(Recipe x : orderedRecipes) {
-                System.out.println(x.getNumIng()+":\t"+x.getName()+": "+x.getTags());
-                System.out.println(x.getURL()+"\n"+x.getImgURL()+"\n"+x.getDesc());
-                System.out.println("---------------------------");
-            }
+            // for(Recipe x : orderedRecipes) {
+            //     System.out.println(x.getNumIng()+":\t"+x.getName()+": "+x.getTags());
+            //     System.out.println(x.getURL()+"\n"+x.getImgURL()+"\n"+x.getDesc());
+            //     System.out.println("---------------------------");
+            // }
 
             
-            System.out.print("Enter a tag: ");
-            String userTag = s.nextLine();
-            ArrayList<Recipe> taggedRecipes = getTaggedRecipes(userTag,orderedRecipes);
+            // System.out.print("Enter a tag: ");
+            // String userTag = s.nextLine();
+            // ArrayList<Recipe> taggedRecipes = getTaggedRecipes(userTag,orderedRecipes);
 
-            System.out.println("AFTER FILTER: ");
-            for(Recipe x : taggedRecipes) {
-                System.out.println(x.getNumIng()+":\t"+x.getName()+": "+x.getTags());
+            String finalOutput = "";
+            //System.out.println("AFTER FILTER: ");
+            for(Recipe x : orderedRecipes) {
+                finalOutput += "1"+x.getName()+"2"+x.getTags()+"3"+x.getURL()+"4"+x.getImgURL()+"5"+x.getDesc()+"0";
+                /*System.out.println(x.getNumIng()+":\t"+x.getName()+": "+x.getTags());
                 System.out.println(x.getURL()+"\n"+x.getImgURL()+"\n"+x.getDesc());
-                System.out.println("---------------------------");
+                System.out.println("---------------------------");*/
             }
-            updateVote(8, "grilled cheese");
+            //updateVote(8, "grilled cheese");
             st.close();
             st2.close();
             st3.close();
             s.close();
+            return finalOutput;
         } catch (Exception e) {
             System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
         }
+        return "No Recipes";
     }
 }
