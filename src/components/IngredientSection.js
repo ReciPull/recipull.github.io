@@ -26,11 +26,11 @@ class IngredientSection extends Component {
         this.setState({ingredientList: []})
     }
 
-    onClick = (e) => {
-        var s = new String("");
-        s = document.getElementById("recipes").innerHTML; 
-        console.log(s);
-    }
+    // onClick = (e) => {
+    //     var s = new String("");
+    //     s = document.getElementById("recipes").innerHTML; 
+    //     console.log(s);
+    // }
 
     render() {
         return (
@@ -44,7 +44,7 @@ class IngredientSection extends Component {
                     <Ingredients ingredientList = {this.state.ingredientList} delIngredient={this.delIngredient}/>
                 </div>
                 <div className = 'boxBot'>
-                    <button onClick={this.onClick} name = 'SearchBtn' className = 'SearchBtn'> Search Recipes </button>
+                    <button name = 'SearchBtn' className = 'SearchBtn'> Search Recipes </button>
                     
                 </div>
                 <div className = 'clearSection'>

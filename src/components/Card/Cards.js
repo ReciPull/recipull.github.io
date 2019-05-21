@@ -1,0 +1,17 @@
+import React, { Component } from 'react';
+import Card from './Card';
+import PropTypes from 'prop-types';
+
+class Cards extends Component {
+    render() {
+        return this.props.recipeList.map((recipe) => (
+            <Card category={recipe.tag} image={recipe.image} title={recipe.title} text={recipe.text}></Card>
+        ));
+    }
+}
+
+Cards.propTypes = {
+    recipeList: PropTypes.array.isRequired
+}
+
+export default Cards; 

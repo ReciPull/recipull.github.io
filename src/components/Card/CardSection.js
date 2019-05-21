@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
+import './CardSection.css'
 import Card from './Card';
-import IngredientSection from './IngredientSection'
+import Cards from './Cards';
 
 class CardSection extends Component {
     state = {
         s: "",
-        recipeList: [
-            {
+        recipeList: [],
+    }
 
-            }
-        ],
+    onClick = (e) => {
+        e.preventDefault(); 
+        var s = ""; 
+        s = document.getElementById("recipes").innerHTML; 
+        console.log(s); 
     }
     render() {
         function addCard(category, imageURL, date, title, text) {
@@ -17,11 +21,11 @@ class CardSection extends Component {
                 <Card category={category} image={imageURL} date={date} title={title} text={text}/>
             )
         }
-        this.setState({s: document.getElementById("recipes").innerHTML});
 
             return(
                 <div className="inLine">
-                    <Card category="Lunch" image='https://hips.hearstapps.com/del.h-cdn.co/assets/17/39/2048x1024/landscape-1506456062-delish-spaghetti-meatballs.jpg?resize=1200:*' date="April 23, 2019"
+                    <button onClick={this.onClick} className="outputButton">Output</button>
+                    {/* <Card category="Lunch" image='https://hips.hearstapps.com/del.h-cdn.co/assets/17/39/2048x1024/landscape-1506456062-delish-spaghetti-meatballs.jpg?resize=1200:*' date="April 23, 2019"
                         title='Spaghetti & Meatballs' 
                         text='Basic recipe for Spaghetti & Meatballs. Perfect, quick recipe for a college student.'
                     />
@@ -30,7 +34,11 @@ class CardSection extends Component {
                         text='Basic recipe for a balanced breakfast meal. Perfect, quick recipe for a college student to jumpstart their day.'
                     />
                     {addCard("Dinner","https://hips.hearstapps.com/del.h-cdn.co/assets/17/39/2048x1024/landscape-1506456062-delish-spaghetti-meatballs.jpg?resize=1200:*", "April 23, 2019", "Spaghetti","This is a Spaghetti recipe")}
-                    {addCard("Lunch","https://hips.hearstapps.com/del.h-cdn.co/assets/17/39/2048x1024/landscape-1506456062-delish-spaghetti-meatballs.jpg?resize=1200:*", "April 23, 2019", "Spaghetti","This is a Spaghetti recipe")}
+                    {addCard("Lunch","https://hips.hearstapps.com/del.h-cdn.co/assets/17/39/2048x1024/landscape-1506456062-delish-spaghetti-meatballs.jpg?resize=1200:*", "April 23, 2019", "Spaghetti","This is a Spaghetti recipe")} */}
+                    {/* {this.props.recipeList.map((ingredient) => (
+
+                    ))} */}
+                    <Cards recipeList={this.state.recipeList}></Cards>
                 </div>
             )
         }
