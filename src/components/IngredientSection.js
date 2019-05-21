@@ -7,7 +7,7 @@ import './IngredientSection.css';
 
 class IngredientSection extends Component {
     state = {
-        ingredientList: []
+        ingredientList: [],
       }
 
     addIngredient = (title) => {
@@ -26,16 +26,11 @@ class IngredientSection extends Component {
         this.setState({ingredientList: []})
     }
 
-    // onClick = (e) => {
-    //     var s = new String("");
-    //     this.state.ingredientList.map((ingredient) => (
-    //         s=s+ingredient.title,
-    //         s=s+":"
-    //     ));
-    //     s = s.substring(0,s.length-1);
-    //     console.log(s); 
-    //     document.getElementById("ingredients").innerHTML = s;
-    // }
+    onClick = (e) => {
+        var s = new String("");
+        s = document.getElementById("recipes").innerHTML; 
+        console.log(s);
+    }
 
     render() {
         return (

@@ -1,14 +1,24 @@
 import React, { Component } from 'react';
 import Card from './Card';
+import IngredientSection from './IngredientSection'
 
 class CardSection extends Component {
-    render() {
+    state = {
+        s: "",
+        recipeList: [
+            {
 
+            }
+        ],
+    }
+    render() {
         function addCard(category, imageURL, date, title, text) {
             return(
                 <Card category={category} image={imageURL} date={date} title={title} text={text}/>
             )
         }
+        this.setState({s: document.getElementById("recipes").innerHTML});
+
             return(
                 <div className="inLine">
                     <Card category="Lunch" image='https://hips.hearstapps.com/del.h-cdn.co/assets/17/39/2048x1024/landscape-1506456062-delish-spaghetti-meatballs.jpg?resize=1200:*' date="April 23, 2019"
