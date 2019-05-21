@@ -234,7 +234,7 @@ public class Driver {
             System.out.println("AFTER FILTER: ");
             String finalOutput = "";
             for(Recipe x : taggedRecipes) {
-                finalOutput += "1"+x.getName()+"2"+x.getTags()+"3"+x.getURL()+"4"+x.getImgURL()+"5"+x.getDesc()+"0";
+                finalOutput += x.getName()+"`"+x.getTags()+"`"+x.getURL()+"`"+x.getImgURL()+"`"+x.getDesc()+"|";
                 /*System.out.println(x.getNumIng()+":\t"+x.getName()+": "+x.getTags());
                 System.out.println(x.getURL()+"\n"+x.getImgURL()+"\n"+x.getDesc());
                 System.out.println("---------------------------");*/

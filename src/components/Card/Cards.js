@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 class Cards extends Component {
     render() {
         return this.props.recipeList.map((recipe) => (
-            <Card category={recipe.tag} image={recipe.image} title={recipe.title} text={recipe.text}></Card>
+            <Card key={recipe.id} category={recipe.tag} image={recipe.image} title={recipe.title} text={recipe.text}></Card>
         ));
     }
 }

@@ -16,6 +16,7 @@ class IngredientSection extends Component {
             title
         }
         this.setState({ ingredientList: [...this.state.ingredientList, newIngredient]});
+        console.log(this.state.ingredientList); 
     }
 
     delIngredient = (id) => {
