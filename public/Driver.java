@@ -38,13 +38,8 @@ public class Driver {
         }
     }
 
-    public void updateVote(int votes, String recipe) {
+    public void updateVote(int votes, String recipe, Connection conn) {
         try {
-            String myDriver = "com.mysql.jdbc.Driver";
-            String myURL = "jdbc:mysql://mysql-recipull.crcqvo2k4dml.us-west-2.rds.amazonaws.com:3306/recipull_rds_db";
-            Class.forName(myDriver);
-            Connection conn = DriverManager.getConnection(myURL,"cs48_ajara","ajara2019");
-
             String query = "UPDATE recipes SET recipe_vote = ? WHERE recipe_name = ?";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.setInt   (1, votes);
@@ -54,71 +49,64 @@ public class Driver {
 
             String query2 = "SELECT * FROM recipes WHERE recipe_name = '"+recipe+"';";
 
-            Statement st2 = conn.createStatement();
-            ResultSet rs2 = st2.executeQuery(query2);
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query2);
 
             String selectedRecipe = "";
             int recipeVotes = 0;
 
-            while (rs2.next()) {
-                selectedRecipe = rs2.getString("recipe_name");
-                recipeVotes = rs2.getInt("recipe_vote");
+            while (rs.next()) {
+                selectedRecipe = rs.getString("recipe_name");
+                recipeVotes = rs.getInt("recipe_vote");
 
                 
                 System.out.format("%s, %s \n", selectedRecipe, recipeVotes);
             } 
         
-            //st.close();
-            st2.close();
+            st.close();
         } catch (Exception e) {
             System.err.println("Got an exception! ");
             System.err.println(e.getMessage());
         }
     }
 
-    public String run(String ingredients) {
+    public ArrayList<Integer> getIngredientId(String ingredients, Connection conn) {
+        ArrayList<Integer> ing = new ArrayList<Integer>();
         try {
-            String myDriver = "com.mysql.jdbc.Driver";
-            String myURL = "jdbc:mysql://mysql-recipull.crcqvo2k4dml.us-west-2.rds.amazonaws.com:3306/recipull_rds_db";
-            Class.forName(myDriver);
-            Connection conn = DriverManager.getConnection(myURL,"cs48_ajara","ajara2019");
-            
-            //Scanner s = new Scanner(System.in);
-            //System.out.print("Enter an ingredient separated by only commas (no spaces between commas): ");
-            //String ingInput = s.nextLine();
-            /*String[] ingList = ingInput.split(":",0);
-            String ingredients = "";
-
-            for(int i = 0; i < ingList.length; i++) {
-                if(i == (ingList.length-1)) {
-                    ingredients += "'"+ingList[i]+"'";
-                } else {
-                    ingredients += "'"+ingList[i]+"', ";
-                }
-            }*/
-
-            //System.out.println(ingredients);
-
             String query = "SELECT ingredients.ingredient_id FROM ingredients WHERE ingredient_name IN ("+ingredients+");";
 
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(query);
-            ArrayList<Integer> ing = new ArrayList<Integer>();
-            String ingIdList = "";
             int counter = 0;
 
             while (rs.next()) {
                 ing.add(rs.getInt("ingredient_id"));
-                ingIdList += (ing.get(counter)).toString() + ", ";
                 
                 counter++;
-                // print the results
-                //System.out.format("%s \n", ingredientId);
             } 
 
-            if(ing.size() > 0)
-                ingIdList = ingIdList.substring(0, ingIdList.length()-2);
+            st.close();
+            return ing;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return ing;
+    }
 
+    public String getIngredientIdList(ArrayList<Integer> ing) {
+        String ingIdList = "";
+
+        for(Integer x: ing) {
+            ingIdList += x.toString() + ", ";
+        }
+        if(ing.size() > 0)
+            ingIdList = ingIdList.substring(0, ingIdList.length()-2);
+        return ingIdList;
+    }
+
+    public String getRecipeIdList(Connection conn, Integer numIng, String ingIdList) {
+        try {
             String query2 = "SELECT pivot.recipe_id FROM pivot WHERE ingredient_id IN ("+ingIdList+");";
 
             Statement st2 = conn.createStatement();
@@ -150,7 +138,6 @@ public class Driver {
             String finalRecipes = "";
 
             int successRecipes = 0;
-            Integer numIng = ing.size();
             for(int i = 0; i < numIng; i++) {
                 for(Integer key : ingFrequency.keySet()) {
                     if((ingFrequency.get(key)).equals(numIng-i)) {
@@ -167,7 +154,18 @@ public class Driver {
                 s.close();
                 return "No Recipes";
             }
-            
+            st2.close();
+            return finalRecipes;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return "No Recipes";
+    }
+
+    public ArrayList<Recipe> createRecipes(Connection conn, String finalRecipes) {
+        ArrayList<Recipe> recipeList = new ArrayList<Recipe>();
+        try  {
             String query3 = "SELECT recipes.recipe_name, recipes.recipe_url, recipes.recipe_img_url, recipes.recipe_tags, recipes.recipe_vote, recipes.description, recipes.num_ingredients FROM recipes WHERE recipes.recipe_id IN ("+finalRecipes+");";
 
             Statement st3 = conn.createStatement();
@@ -180,7 +178,6 @@ public class Driver {
             String recipeDesc = "";
             int recipeVote = 0;
             int numIngIncluded = 0;
-            ArrayList<Recipe> recipeList = new ArrayList<Recipe>();
 
             while (rs3.next()) {
                 Recipe r = new Recipe();
@@ -203,43 +200,58 @@ public class Driver {
                 recipeDesc = rs3.getString("description");
                 r.setDescription(recipeDesc);
                 recipeList.add(r);
-
-                // print the results
-                //System.out.format("%s, %s, %s \n", recipeName, recipeTags, recipeVote);
             } 
-            ArrayList<Recipe> orderedRecipes = new ArrayList<Recipe>();
+            st3.close();
+            return recipeList;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return recipeList;
+    }
 
-            for(int i = 0; i < numIng; i++) {
-                for(Recipe r : recipeList) {
-                    if(((Integer)r.getNumIng()).equals(numIng-i)) {
-                        orderedRecipes.add(r);
-                    }
+    public ArrayList<Recipe> orderRecipes(ArrayList<Recipe> recipeList, Integer numIng) {
+        ArrayList<Recipe> orderedRecipes = new ArrayList<Recipe>();
+
+        for(int i = 0; i < numIng; i++) {
+            for(Recipe r : recipeList) {
+                if(((Integer)r.getNumIng()).equals(numIng-i)) {
+                    orderedRecipes.add(r);
                 }
             }
+        }
+        return orderedRecipes;
+    }
 
-            // for(Recipe x : orderedRecipes) {
-            //     System.out.println(x.getNumIng()+":\t"+x.getName()+": "+x.getTags());
-            //     System.out.println(x.getURL()+"\n"+x.getImgURL()+"\n"+x.getDesc());
-            //     System.out.println("---------------------------");
-            // }
+    public String run(String ingredients) {
+        try {
+            String myDriver = "com.mysql.jdbc.Driver";
+            String myURL = "jdbc:mysql://mysql-recipull.crcqvo2k4dml.us-west-2.rds.amazonaws.com:3306/recipull_rds_db";
+            Class.forName(myDriver);
+            Connection conn = DriverManager.getConnection(myURL,"cs48_ajara","ajara2019");
 
-            
-            // System.out.print("Enter a tag: ");
-            // String userTag = s.nextLine();
-            // ArrayList<Recipe> taggedRecipes = getTaggedRecipes(userTag,orderedRecipes);
+            ArrayList<Integer> ingIds = getIngredientId(ingredients, conn);
+            String ingIdList = getIngredientIdList(ingIds);
+
+            Integer numIng = ingIds.size();
+            String finalRecipes = getRecipeIdList(conn, numIng, ingIdList);
+            if(finalRecipes.compareTo("No Recipes") == 0) {
+                System.out.println("No recipes containing all "+numIng+" ingredients found.");
+                s.close();
+                return "No Recipes";
+            }
+            ArrayList<Recipe> recipeList = createRecipes(conn, finalRecipes);
+
+            ArrayList<Recipe> orderedRecipes = orderRecipes(recipeList, numIng);
 
             String finalOutput = "";
-            //System.out.println("AFTER FILTER: ");
             for(Recipe x : orderedRecipes) {
-                finalOutput += "1"+x.getName()+"2"+x.getTags()+"3"+x.getURL()+"4"+x.getImgURL()+"5"+x.getDesc()+"0";
-                /*System.out.println(x.getNumIng()+":\t"+x.getName()+": "+x.getTags());
-                System.out.println(x.getURL()+"\n"+x.getImgURL()+"\n"+x.getDesc());
-                System.out.println("---------------------------");*/
+                finalOutput += "`"+x.getName()+"`"+x.getTags()+"`"+x.getURL()+"`"+x.getImgURL()+"`"+x.getDesc()+"|";
             }
-            //updateVote(8, "grilled cheese");
-            st.close();
-            st2.close();
-            st3.close();
+            if(finalOutput.length() > 1) {
+                finalOutput = finalOutput.substring(0, finalOutput.length()-1);
+            }
+            //updateVote(8, "grilled cheese", conn);
             s.close();
             return finalOutput;
         } catch (Exception e) {
