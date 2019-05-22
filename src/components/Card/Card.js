@@ -52,7 +52,7 @@ class Card extends React.Component {
         return (
         <article className="card">
             <CardHeader category={this.props.category} image={this.props.image}/>
-            <CardBody date={this.props.date} title={this.props.title} text={this.props.text}/>
+            <CardBody numIngredients={this.props.numIngredients} date={this.props.date} title={this.props.title} text={this.props.text}/>
         </article>
         )
     }
