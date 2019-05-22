@@ -14,7 +14,7 @@ public class TestRecipeIds {
     public Driver d;
     public Connection conn;
 
-    /*@Before 
+    @Before 
     public void executeBeforeAllTests() throws ClassNotFoundException, SQLException {
         d = new Driver();
         String myDriver = "com.mysql.jdbc.Driver";
@@ -26,25 +26,21 @@ public class TestRecipeIds {
     @Test 
     public void testMultIngredient() {
         String ingIdList = "25, 26, 57";
-        String recipeList = d.getRecipeIdList(ingIdList);
-        assertEquals("", recipeList);
+        String recipeList = d.getRecipeIdList(conn, (Integer)3, ingIdList);
+        assertEquals("4, 6, 3, 8, 1, 2, 5, 7, 9", recipeList);
     }
 
     @Test 
     public void testSingleIngredient() {
-        String ingredients = "'orange'";
-        ArrayList<Integer> ingIds = new ArrayList<Integer>();
-        ingIds = d.getIngredientId(ingredients, conn);
-        String ingList = d.getIngredientIdList(ingIds);
-        assertEquals("45", ingList);
+        String ingIdList = "11";
+        String recipeList = d.getRecipeIdList(conn, (Integer)1, ingIdList);
+        assertEquals("0, 2", recipeList);
     }
 
     @Test 
-    public void testMultiWordIngredient() {
-        String ingredients = "'maple syrup'";
-        ArrayList<Integer> ingIds = new ArrayList<Integer>();
-        ingIds = d.getIngredientId(ingredients, conn);
-        String ingList = d.getIngredientIdList(ingIds);
-        assertEquals("37", ingList);
-    }*/
+    public void testNoRecipes() {
+        String ingIdList = "20";
+        String recipeList = d.getRecipeIdList(conn, (Integer)1, ingIdList);
+        assertEquals("No Recipes", recipeList);
+    }
 }

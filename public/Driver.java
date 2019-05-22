@@ -2,9 +2,30 @@ import java.sql.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Collections;
 
 public class Driver {
     private Scanner s = new Scanner(System.in);
+    private ArrayList<Recipe> selectedRecipes;
+
+    public ArrayList<Recipe> alphabetize(ArrayList<Recipe> initRecipes) {
+        ArrayList<Recipe> temp = new ArrayList<Recipe>();
+        for(Recipe x : initRecipes) 
+            temp.add(x);
+        Collections.sort(temp, new AlphabetizeOrder());
+        return temp;
+        // maybe clicking on filter pulls from recipes innerHTML and sends string, then parse through to re-make recipes, then access name area and return re-sorted string
+    }
+
+    public ArrayList<Recipe> sortByVote(ArrayList<Recipe> initRecipes) {
+        ArrayList<Recipe> temp = new ArrayList<Recipe>();
+        for(Recipe x : initRecipes) 
+            temp.add(x);
+        Collections.sort(temp, new NumericalOrder());
+        return temp;
+        // maybe clicking on filter pulls from recipes innerHTML and sends string, then parse through to re-make recipes, then access votes area and return re-sorted string
+            // so argument would be a string instead (d.sortByVote(whatever.innerHTML))
+    }
 
     public ArrayList<Recipe> getTaggedRecipes(String tagName, ArrayList<Recipe> initRecipes) {
         ArrayList<Recipe> finalRecipes = new ArrayList<Recipe>();
@@ -17,15 +38,11 @@ public class Driver {
         }
         // caller must check if arrayList is empty
         return finalRecipes;
+        // maybe clicking on filter pulls from recipes innerHTML and sends string, then parse through to re-make recipes, then access votes area and return re-sorted string
     }
 
-    public void setNumIngData(int numIng, int recipeId) {
+    public void setNumIngData(int numIng, int recipeId, Connection conn) {
         try {
-            String myDriver = "com.mysql.jdbc.Driver";
-            String myURL = "jdbc:mysql://mysql-recipull.crcqvo2k4dml.us-west-2.rds.amazonaws.com:3306/recipull_rds_db";
-            Class.forName(myDriver);
-            Connection conn = DriverManager.getConnection(myURL,"cs48_ajara","ajara2019");
-
             String query = "UPDATE recipes SET num_ingredients = ? WHERE recipe_id = ?";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.setInt(1, numIng);
@@ -60,9 +77,10 @@ public class Driver {
                 recipeVotes = rs.getInt("recipe_vote");
 
                 
-                System.out.format("%s, %s \n", selectedRecipe, recipeVotes);
+                //System.out.format("%s, %s \n", selectedRecipe, recipeVotes);
             } 
-        
+            // FIND A WAY TO UPDATE RECIPE OBJECT VOTE FIELD FROM HERE 
+            // HOW ARE WE EVEN GOING TO ACCESS THE RECIPE OBJECT FROM THE CARD ALONE?
             st.close();
         } catch (Exception e) {
             System.err.println("Got an exception! ");
@@ -142,7 +160,7 @@ public class Driver {
                 for(Integer key : ingFrequency.keySet()) {
                     if((ingFrequency.get(key)).equals(numIng-i)) {
                         finalRecipes += key+", ";
-                        setNumIngData(numIng-i, key);
+                        setNumIngData(numIng-i, key, conn);
                         successRecipes++;
                     }
                 }
@@ -150,7 +168,7 @@ public class Driver {
             if(successRecipes > 0)
                 finalRecipes = finalRecipes.substring(0, finalRecipes.length()-2);
             if(successRecipes == 0) {
-                System.out.println("No recipes containing all "+numIng+" ingredients found.");
+                System.out.println("No recipes containing any of the "+numIng+" ingredients found.");
                 s.close();
                 return "No Recipes";
             }
@@ -165,6 +183,9 @@ public class Driver {
 
     public ArrayList<Recipe> createRecipes(Connection conn, String finalRecipes) {
         ArrayList<Recipe> recipeList = new ArrayList<Recipe>();
+        if(finalRecipes.compareTo("No Recipes") == 0) {
+            return recipeList;
+        }
         try  {
             String query3 = "SELECT recipes.recipe_name, recipes.recipe_url, recipes.recipe_img_url, recipes.recipe_tags, recipes.recipe_vote, recipes.description, recipes.num_ingredients FROM recipes WHERE recipes.recipe_id IN ("+finalRecipes+");";
 
@@ -246,7 +267,7 @@ public class Driver {
 
             String finalOutput = "";
             for(Recipe x : orderedRecipes) {
-                finalOutput += "`"+x.getName()+"`"+x.getTags()+"`"+x.getURL()+"`"+x.getImgURL()+"`"+x.getDesc()+"|";
+                finalOutput += "`"+x.getName()+"`"+x.getTags()+"`"+x.getURL()+"`"+x.getImgURL()+"`"+x.getDesc()+"`"+x.getNumIng()+" of your ingredients are included.|";
             }
             if(finalOutput.length() > 1) {
                 finalOutput = finalOutput.substring(0, finalOutput.length()-1);

@@ -14,7 +14,6 @@ public class GetName extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
                                             throws ServletException, IOException {
-        //String output = "";
         final JsonObject retVal = new JsonObject();
         String reqDataID = "NONE";
         if (request.getParameterMap().containsKey("ID")) {
@@ -31,11 +30,8 @@ public class GetName extends HttpServlet {
         }
         Driver d = new Driver();
         String s = d.run(finVals);
-        //System.out.println("GET request, ID: "+finVals);
         retVal.addProperty(s, "final value");
-        //retVal.addProperty("prop2", "property2val");
         try {
-            //output = retVal.toString();
             response.setStatus(HttpServletResponse.SC_OK);
  
         } catch (Exception ex) {
@@ -45,7 +41,6 @@ public class GetName extends HttpServlet {
             response.addHeader("Access-Control-Allow-Origin", "*");
             //response.setContentType("text/html;charset=UTF-8");
             response.setContentType("application/json; charset=utf-8");
-            //response.getWriter().println(retVal);
             response.getWriter().println(retVal);
             response.getWriter().close();
         }
