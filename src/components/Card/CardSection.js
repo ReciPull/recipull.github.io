@@ -10,7 +10,7 @@ class CardSection extends Component {
         recipeList: [
         ],
     }
-    
+
     addRecipe = (e) => {
         if (document.getElementById("recipes").innerHTML === "") {
             return;
@@ -29,7 +29,8 @@ class CardSection extends Component {
                     tag: s2[2],
                     image: s2[4], 
                     title: s2[1], 
-                    text: s2[5]
+                    text: s2[5],
+                    numIngredients: s2[6],
                 }
                 console.log(newRecipe); 
                 this.state.recipeList.push(newRecipe); 
@@ -40,12 +41,6 @@ class CardSection extends Component {
         }  
     }
     render() {
-        function addCard(category, imageURL, title, text) {
-            return(
-                <Card category={category} image={imageURL} title={title} text={text}/>
-            )
-        }
-
             return(
                 <div className="inLine">
                     <button onClick={this.addRecipe} className="outputButton">Output</button>
