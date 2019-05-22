@@ -7,7 +7,7 @@ import './IngredientSection.css';
 
 class IngredientSection extends Component {
     state = {
-        ingredientList: []
+        ingredientList: [],
       }
 
     addIngredient = (title) => {
@@ -16,6 +16,7 @@ class IngredientSection extends Component {
             title
         }
         this.setState({ ingredientList: [...this.state.ingredientList, newIngredient]});
+        console.log(this.state.ingredientList); 
     }
 
     delIngredient = (id) => {
@@ -39,13 +40,8 @@ class IngredientSection extends Component {
 
     // onClick = (e) => {
     //     var s = new String("");
-    //     this.state.ingredientList.map((ingredient) => (
-    //         s=s+ingredient.title,
-    //         s=s+":"
-    //     ));
-    //     s = s.substring(0,s.length-1);
-    //     console.log(s); 
-    //     document.getElementById("ingredients").innerHTML = s;
+    //     s = document.getElementById("recipes").innerHTML; 
+    //     console.log(s);
     // }
 
     render() {
@@ -60,7 +56,7 @@ class IngredientSection extends Component {
                     <Ingredients ingredientList = {this.state.ingredientList} delIngredient={this.delIngredient}/>
                 </div>
                 <div className = 'boxBot'>
-                    <button onClick={this.onClick} name = 'SearchBtn' className = 'SearchBtn'> Search Recipes </button>
+                    <button name = 'SearchBtn' className = 'SearchBtn'> Search Recipes </button>
                     
                 </div>
                 <div className = 'clearSection'>

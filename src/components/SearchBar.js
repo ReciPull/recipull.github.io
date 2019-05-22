@@ -8,21 +8,20 @@ export class SearchBar extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        this.props.addIngredient(this.state.title);
-        var s = new String("");
-        // this.props.ingredientList.map((ingredient) => (
-        //     s=s+ingredient.title,
-        //     s=s+":"
-        // ));
-        // s = s.substring(0,s.length-1);
+        if (this.state.title === '') {
+            return; 
+        }
+        else {
+            this.props.addIngredient(this.state.title);
+            var s = new String("");
 
-        var t = this.state.title;
-        // console.log(s); 
-        
-        s = document.getElementById("ingredients").innerHTML + t+":";
-        document.getElementById("ingredients").innerHTML = s;
-        console.log(document.getElementById("ingredients").innerHTML);
-        this.setState({ title: ''});
+            var t = this.state.title;
+            
+            s = document.getElementById("ingredients").innerHTML + t+":";
+            document.getElementById("ingredients").innerHTML = s;
+            console.log(document.getElementById("ingredients").innerHTML);
+            this.setState({ title: ''});
+        }
     }
 
     onChange = (e) => this.setState({ [e.target.name]: e.target.value });
