@@ -19,10 +19,21 @@ class IngredientSection extends Component {
     }
 
     delIngredient = (id) => {
+        var name = this.state.ingredientList.find(function(element){
+            return element.id == id
+        });
+        var s = new String("");
+        var t = new String("");
+        s = document.getElementById("ingredients").innerHTML;
+        s = s.replace(name.title + ':', "");
+        document.getElementById("ingredients").innerHTML = s;
+        console.log(document.getElementById("ingredients").innerHTML);
+
         this.setState({ ingredientList: [...this.state.ingredientList.filter(ingredient => ingredient.id !== id)]})
     }
 
     clearAll = () => {
+        document.getElementById("ingredients").innerHTML = "";
         this.setState({ingredientList: []})
     }
 
