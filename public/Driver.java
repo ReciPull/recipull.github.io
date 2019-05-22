@@ -281,4 +281,42 @@ public class Driver {
         }
         return "No Recipes";
     }
+
+    public String runAlexa(String ingredients) {
+        try {
+            String myDriver = "com.mysql.jdbc.Driver";
+            String myURL = "jdbc:mysql://mysql-recipull.crcqvo2k4dml.us-west-2.rds.amazonaws.com:3306/recipull_rds_db";
+            Class.forName(myDriver);
+            Connection conn = DriverManager.getConnection(myURL,"cs48_ajara","ajara2019");
+
+            ArrayList<Integer> ingIds = getIngredientId(ingredients, conn);
+            String ingIdList = getIngredientIdList(ingIds);
+
+            Integer numIng = ingIds.size();
+            String finalRecipes = getRecipeIdList(conn, numIng, ingIdList);
+            if(finalRecipes.compareTo("No Recipes") == 0) {
+                System.out.println("No recipes containing all "+numIng+" ingredients found.");
+                s.close();
+                return "No Recipes";
+            }
+            ArrayList<Recipe> recipeList = createRecipes(conn, finalRecipes);
+
+            ArrayList<Recipe> orderedRecipes = orderRecipes(recipeList, numIng);
+
+            String finalOutput = "";
+            for(Recipe x : orderedRecipes) {
+                finalOutput += "`"+x.getName()+"`"+x.getURL();
+            }
+            // if(finalOutput.length() > 1) {
+            //     finalOutput = finalOutput.substring(0, finalOutput.length()-1);
+            // }
+            //updateVote(8, "grilled cheese", conn);
+            s.close();
+            return finalOutput;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return "No Recipes";
+    }
 }
