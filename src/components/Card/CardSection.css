@@ -1,4 +1,19 @@
 .outputButton {
-    width:80%;
-    cursor:auto;
+    width:600px;
+    border:none;
+    background: #555;
+    color: #fff;
+    padding: 7px 20px;
+    cursor: pointer; 
+}
+
+.inLine {
+    padding-top: 15px;
+    text-align:center;  
+}
+
+.outputButtonContainer {
+    padding-left: 225px; 
+    text-align:center; 
+    justify-content: center;
 }

@@ -31,7 +31,7 @@ class CardBody extends React.Component {
         return (
         <div className="fullBody">
             <div className="card-body">
-                <p className="date">{this.props.numIngredients} Ingredients</p>
+                <p className="date">{this.props.numIngredients}</p>
                 
                 <h2>{this.props.title}</h2>
                 
