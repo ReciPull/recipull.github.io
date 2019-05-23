@@ -8,7 +8,7 @@ export class SearchBar extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        if (this.state.title === '') {
+        if (this.state.title == '') {
             return; 
         }
         else {
@@ -16,10 +16,12 @@ export class SearchBar extends Component {
             var s = new String("");
 
             var t = this.state.title;
-            
-            s = document.getElementById("ingredients").innerHTML + t+":";
-            document.getElementById("ingredients").innerHTML = s;
-            console.log(document.getElementById("ingredients").innerHTML);
+            if(document.getElementById("ingredients") != null)
+            {
+                s = document.getElementById("ingredients").innerHTML + t+":";
+                document.getElementById("ingredients").innerHTML = s;
+                console.log(document.getElementById("ingredients").innerHTML);
+            }
             this.setState({ title: ''});
         }
     }

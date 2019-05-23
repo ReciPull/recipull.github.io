@@ -25,16 +25,22 @@ class IngredientSection extends Component {
         });
         var s = new String("");
         var t = new String("");
-        s = document.getElementById("ingredients").innerHTML;
-        s = s.replace(name.title + ':', "");
-        document.getElementById("ingredients").innerHTML = s;
-        console.log(document.getElementById("ingredients").innerHTML);
+        if(document.getElementById("ingredients") != null)
+        {
+            s = document.getElementById("ingredients").innerHTML;
+            s = s.replace(name.title + ':', "");
+            document.getElementById("ingredients").innerHTML = s;
+            console.log(document.getElementById("ingredients").innerHTML);
+        }
 
         this.setState({ ingredientList: [...this.state.ingredientList.filter(ingredient => ingredient.id !== id)]})
     }
 
     clearAll = () => {
-        document.getElementById("ingredients").innerHTML = "";
+        if(document.getElementById("ingredients") != null)
+        {
+            document.getElementById("ingredients").innerHTML = "";
+        }
         this.setState({ingredientList: []})
     }
 

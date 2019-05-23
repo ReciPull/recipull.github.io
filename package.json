@@ -33,6 +33,10 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^2.0.1"
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.13.1",
+    "gh-pages": "^2.0.1",
+    "jsdom": "15.1.0",
+    "jsdom-global": "3.0.2"
   }
 }
