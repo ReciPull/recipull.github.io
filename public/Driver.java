@@ -200,6 +200,7 @@ public class Driver {
                 
                 //System.out.format("%s, %s \n", selectedRecipe, recipeVotes);
             } 
+            // return string with vote number 
             // FIND A WAY TO UPDATE RECIPE OBJECT VOTE FIELD FROM HERE 
             // HOW ARE WE EVEN GOING TO ACCESS THE RECIPE OBJECT FROM THE CARD ALONE?
             st.close();
@@ -388,7 +389,7 @@ public class Driver {
 
             String finalOutput = "";
             for(Recipe x : orderedRecipes) {
-                finalOutput += "`"+x.getName()+"`"+x.getTags()+"`"+x.getURL()+"`"+x.getImgURL()+"`"+x.getDesc()+"`"+x.getNumIng()+" of your ingredients are included.|";
+                finalOutput += "`"+x.getName()+"`"+x.getTags()+"`"+x.getURL()+"`"+x.getImgURL()+"`"+x.getDesc()+"`"+x.getNumIng()+" of your ingredients are included."+"`"+x.getVotes()+"|";
             }
             if(finalOutput.length() > 1) {
                 finalOutput = finalOutput.substring(0, finalOutput.length()-1);
