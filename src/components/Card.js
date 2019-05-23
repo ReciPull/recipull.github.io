@@ -98,7 +98,9 @@ class CardBody extends React.Component {
                 
             </div>
             <div className="linkButton">
+                <a href={this.props.link}>
                 <Button />
+                </a>
             </div>
         </div>
         )
@@ -110,7 +112,7 @@ class Card extends React.Component {
         return (
         <article className="card">
             <CardHeader category={this.props.category} image={this.props.image}/>
-            <CardBody numVotes={this.props.numVotes} numIngredients={this.props.numIngredients} date={this.props.date} title={this.props.title} text={this.props.text}/>
+            <CardBody link={this.props.link} numVotes={this.props.numVotes} numIngredients={this.props.numIngredients} date={this.props.date} title={this.props.title} text={this.props.text}/>
         </article>
         )
     }

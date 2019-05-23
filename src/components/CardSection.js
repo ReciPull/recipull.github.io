@@ -46,6 +46,7 @@ class CardSection extends Component {
                         text: s2[5],
                         numIngredients: s2[6],
                         numVotes: parseInt(s2[7]), 
+                        link: s2[3],
                     }
                     console.log(newRecipe); 
                     this.state.recipeList.push(newRecipe); 
