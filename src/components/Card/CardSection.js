@@ -46,6 +46,7 @@ class CardSection extends Component {
                         title: s2[1], 
                         text: s2[5],
                         numIngredients: s2[6],
+                        numVotes: parseInt(s2[7]), 
                     }
                     console.log(newRecipe); 
                     this.state.recipeList.push(newRecipe); 
@@ -64,6 +65,7 @@ class CardSection extends Component {
                     <div className="outputButtonContainer">
                         <button onClick={this.addRecipe} className="outputButton">Output</button>
                     </div>
+                    <br></br>
                     <Cards hasRecipes={this.state.hasRecipes} recipeList={this.state.recipeList}></Cards>
                 </div>
             )

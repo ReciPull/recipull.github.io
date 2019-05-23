@@ -7,7 +7,7 @@ class Cards extends Component {
     render() {
         if (this.props.hasRecipes > 0) {
             return this.props.recipeList.map((recipe) => (
-                <Card key={recipe.id} category={recipe.tag} image={recipe.image} title={recipe.title} text={recipe.text} numIngredients={recipe.numIngredients}></Card>
+                <Card key={recipe.id} category={recipe.tag} image={recipe.image} title={recipe.title} text={recipe.text} numIngredients={recipe.numIngredients} numVotes={recipe.numVotes}></Card>
             ));
         }
         else if (this.props.hasRecipes < 0) {
