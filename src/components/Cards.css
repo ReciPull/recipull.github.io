@@ -1,0 +1,10 @@
+.noRecipeContainer {
+    margin-left:0px;
+    width:1100px;
+    text-align:center; 
+    justify-content: center;
+}
+
+.noRecipes {
+    font-size: 30px;
+}

@@ -1,0 +1,125 @@
+body, html {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #fff;
+}
+
+.card {
+  width:30%;
+  height:50%;
+  display: block;
+  margin: 60px auto;
+  box-shadow: 10px 5px 40px 20px darken(#341cac, 5%);
+  transition: .25s;
+  padding: 10px;
+  display: inline-block;
+  position: relative;
+}
+
+
+.card:hover {
+    box-shadow: 10px 5px 40px 20px darken(#341cac, 10%);
+    cursor:pointer;
+    /* height:500px; */
+    width:350px;
+}
+
+.button-primary:hover {
+    transform: translate(10px, 0);
+    cursor:pointer;
+}
+
+.upVoteBtn {
+  width:30px;
+  border:none;
+  background: #013D3E;
+  color: #fff;
+  padding: 7px 7px;
+  cursor: pointer; 
+}
+
+.downVoteBtn {
+  width:30px;
+  border:none;
+  background: #013D3E;
+  color: #fff;
+  padding: 7px 7px;
+  cursor: pointer; 
+}
+
+.vote {
+  padding:7px;
+}
+
+.card-header {
+  height: 50%;
+  width: 100%;
+  padding: 15px;
+  width:100%;
+  background-size:cover;
+  color:#174949;
+  float: top;
+}
+
+.card-header--title {
+  text-transform: uppercase;
+  font-weight:bold;
+  margin: 0;
+}
+
+.fullBody
+{
+  height:100%;
+  
+}
+.linkButton
+{
+  background-color:#28948B;
+}
+
+.card-body {
+  padding: 15px;
+  height: 50%;
+  width: 100%;
+  background-color:#28948B;
+  /* background-color:#F9FFFF; */
+
+  overflow-y: auto;
+}
+
+.date {
+  font-size: 11px;
+  font-weight: 600;
+  color:#013D3E;
+}
+
+.body-content {
+  padding-bottom: 40px;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.button-primary {
+  border: none;
+  box-shadow: none;
+  background-color:transparent;
+  color: #E43544;
+  font-size: 15px;
+  transition:.25s;
+  width:100%;
+  padding: 15px;
+
+  
+}
+
+i{
+  padding-right:8px;
+}
+
+
+.designer-link {
+  color:#fff;
+  text-align:center;
+  font-size: 12px;
+  text-decoration: none;
+  display:block;
+}

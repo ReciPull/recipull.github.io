@@ -3,7 +3,7 @@ import './App.css'
 import IngredientSection from './components/IngredientSection';
 import logo from './components/imgs/recipull_circle.png'
 
-import CardSection from './components/Card/CardSection';
+import CardSection from './components/CardSection';
 
 class App extends React.Component {
     render() {
