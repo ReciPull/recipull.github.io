@@ -16,7 +16,7 @@ class Cards extends Component {
                     <br></br>
                     <div className="noRecipeContainer">
                         <br></br>
-                        <h className="noRecipes" >No Recipes, Sorry! </h>
+                        <h className="noRecipes" >No Recipes Contain Any of Your Ingredients, Sorry! </h>
                     </div>
                 </div>
             )

@@ -12,7 +12,6 @@ class CardSection extends Component {
         ],
     }
 
-
     addRecipe = (e) => {
         if (document.getElementById("recipes").innerHTML === "") {
             return;
@@ -63,7 +62,13 @@ class CardSection extends Component {
             return(
                 <div className="inLine">
                     <div className="outputButtonContainer">
-                        <button onClick={this.addRecipe} className="outputButton">Output</button>
+                        <button name="lunchFilter" className="leftFilter">Lunch</button>
+                        <button name="breakfastFilter" className="leftFilter">Breakfast</button>
+                        <button name="abcFilter" className="leftFilter">A-Z</button>
+                        <button onClick={this.addRecipe} className="outputButton">Find My Recipes!</button>
+                        <button name="vegFilter" className="rightFilter">Vegan</button>
+                        <button name="voteFilter" className="rightFilter">Top-Rated</button>
+                        <button name="dessertFilter" className="rightFilter">Dessert</button>
                     </div>
                     <br></br>
                     <Cards hasRecipes={this.state.hasRecipes} recipeList={this.state.recipeList}></Cards>

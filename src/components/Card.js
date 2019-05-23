@@ -26,7 +26,7 @@ class Button extends React.Component {
     }
 }
 
-class Voting extends React.Component { 
+/*class Voting extends React.Component { 
     state = {
         numVotes: 0, 
     }
@@ -56,7 +56,7 @@ class Voting extends React.Component {
             </div>
         )
     }
-}
+}*/
   
 class CardBody extends React.Component {
     state = {
@@ -67,7 +67,7 @@ class CardBody extends React.Component {
         e.preventDefault(); 
         this.state.numVotes = this.state.numVotes + 1; 
         this.setState({numVotes: this.state.numVotes}); 
-        document.getElementById("vote").innerHTML = this.state.numVotes; 
+        document.getElementById("vote").innerHTML = this.props.title + "`" + this.state.numVotes; 
         console.log(document.getElementById("vote").innerHTML); 
     }
 
@@ -75,7 +75,7 @@ class CardBody extends React.Component {
         e.preventDefault(); 
         this.state.numVotes = this.state.numVotes - 1; 
         this.setState({numVotes: this.state.numVotes}); 
-        document.getElementById("vote").innerHTML = this.state.numVotes;
+        document.getElementById("vote").innerHTML = this.props.title + "`" + this.state.numVotes;
         console.log(document.getElementById("vote").innerHTML);  
     }
 
@@ -86,20 +86,15 @@ class CardBody extends React.Component {
             <div className="card-body">
                 <p className="date">{this.props.numIngredients}</p>
 
-                <div>
-                    <button id="upVote" onClick={this.upVote}>
-                        Upvote
-                    </button>
-                    <h>{this.state.numVotes}</h>
-                    <button id="downVote" onClick={this.downVote}>
-                        Downvote
-                    </button>
-
-                </div>
                 <h2>{this.props.title}</h2>
                 
                 <p className="body-content">{this.props.text}</p>
-                
+                <div>
+                    <button name = 'upVoteBtn' className = 'upVoteBtn' onClick={this.upVote}> ↑ </button>
+                    <div className='vote'>{this.state.numVotes}</div>
+                    <button name='downVoteBtn' className = 'downVoteBtn' onClick={this.downVote}> ↓ </button>
+
+                </div>
                 
             </div>
             <div className="linkButton">

@@ -16,6 +16,33 @@ public class Driver {
         return temp;
         // maybe clicking on filter pulls from recipes innerHTML and sends string, then parse through to re-make recipes, then access name area and return re-sorted string
     }
+    /*
+    public String alphabetize(String recipeString) {
+        ArrayList<Recipe> original = new ArrayList<Recipe>();
+
+        String[] recipes = recipeString.split("|");
+        for(String x : recipes) {
+            String[] fields = x.split("`");
+            Recipe r = new Recipe();
+            r.setName(fields[0]);
+            String[] tags = fields[1].split(", ");
+            for(String t : tags) 
+                r.addTag(t);
+            r.setURL(fields[2]);
+            r.setImgURL(fields[3]);
+            r.setDesc(fields[4]);
+            r.setNumIng(Integer.parseInt(fields[5]));
+            original.add(r);
+        }
+        Collections.sort(original, new AlphabetizeOrder());
+
+        String taggedOutput = "";
+        for(Recipe x : original) {
+            taggedOutput += "`"+x.getName()+"`"+x.getTags()+"`"+x.getURL()+"`"+x.getImgURL()+"`"+x.getDesc()+"`"+x.getNumIng()+" of your ingredients are included.|";
+        }
+        return taggedOutput;
+    }
+    */
 
     public ArrayList<Recipe> sortByVote(ArrayList<Recipe> initRecipes) {
         ArrayList<Recipe> temp = new ArrayList<Recipe>();
@@ -26,6 +53,60 @@ public class Driver {
         // maybe clicking on filter pulls from recipes innerHTML and sends string, then parse through to re-make recipes, then access votes area and return re-sorted string
             // so argument would be a string instead (d.sortByVote(whatever.innerHTML))
     }
+
+    /*
+    public String getTaggedRecipes(String recipeString) {
+        ArrayList<Recipe> original = new ArrayList<Recipe>();
+
+        String[] recipes = recipeString.split("|");
+        for(String x : recipes) {
+            String[] fields = x.split("`");
+            Recipe r = new Recipe();
+            r.setName(fields[0]);
+            String[] tags = fields[1].split(", ");
+            for(String t : tags) 
+                r.addTag(t);
+            r.setURL(fields[2]);
+            r.setImgURL(fields[3]);
+            r.setDesc(fields[4]);
+            r.setNumIng(Integer.parseInt(fields[5]));
+            original.add(r);
+        }
+
+        try {
+            String myDriver = "com.mysql.jdbc.Driver";
+            String myURL = "jdbc:mysql://mysql-recipull.crcqvo2k4dml.us-west-2.rds.amazonaws.com:3306/recipull_rds_db";
+            Class.forName(myDriver);
+            Connection conn = DriverManager.getConnection(myURL,"cs48_ajara","ajara2019");
+
+            for(Recipe x : original) {
+                String query = "SELECT recipes.recipe_vote FROM recipes WHERE recipe_id = "+x.getName()+";";
+
+                Statement st = conn.createStatement();
+                ResultSet rs = st.executeQuery(query);
+
+                int recipeVotes = 0;
+
+                while (rs.next()) {
+                    recipeVotes = rs.getInt("recipe_vote");
+                    x.setVotes(recipeVotes);
+                } 
+            }
+            st.close();
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+
+        Collections.sort(original, new NumericalOrder());
+
+        String taggedOutput = "";
+        for(Recipe x : original) {
+            taggedOutput += "`"+x.getName()+"`"+x.getTags()+"`"+x.getURL()+"`"+x.getImgURL()+"`"+x.getDesc()+"`"+x.getNumIng()+" of your ingredients are included.|";
+        }
+        return taggedOutput;
+    }
+    */
 
     public ArrayList<Recipe> getTaggedRecipes(String tagName, ArrayList<Recipe> initRecipes) {
         ArrayList<Recipe> finalRecipes = new ArrayList<Recipe>();
@@ -41,6 +122,41 @@ public class Driver {
         // maybe clicking on filter pulls from recipes innerHTML and sends string, then parse through to re-make recipes, then access votes area and return re-sorted string
     }
 
+    /*
+    public String getTaggedRecipes(String tagName, String recipeString) {
+        ArrayList<Recipe> original = new ArrayList<Recipe>();
+
+        String[] recipes = recipeString.split("|");
+        for(String x : recipes) {
+            String[] fields = x.split("`");
+            Recipe r = new Recipe();
+            r.setName(fields[0]);
+            String[] tags = fields[1].split(", ");
+            for(String t : tags) 
+                r.addTag(t);
+            r.setURL(fields[2]);
+            r.setImgURL(fields[3]);
+            r.setDesc(fields[4]);
+            r.setNumIng(Integer.parseInt(fields[5]));
+            original.add(r);
+        }
+        ArrayList<Recipe> finalRecipes = new ArrayList<Recipe>();
+        boolean isTagged = false;
+        for(Recipe x : original) {
+            isTagged = x.checkTags(tagName);
+            if(isTagged) {
+                finalRecipes.add(x);
+            }
+        }
+
+        String taggedOutput = "";
+        for(Recipe x : finalRecipes) {
+            taggedOutput += "`"+x.getName()+"`"+x.getTags()+"`"+x.getURL()+"`"+x.getImgURL()+"`"+x.getDesc()+"`"+x.getNumIng()+" of your ingredients are included.|";
+        }
+        return taggedOutput;
+    }
+    */
+
     public void setNumIngData(int numIng, int recipeId, Connection conn) {
         try {
             String query = "UPDATE recipes SET num_ingredients = ? WHERE recipe_id = ?";
@@ -55,8 +171,13 @@ public class Driver {
         }
     }
 
-    public void updateVote(int votes, String recipe, Connection conn) {
+    public void updateVote(int votes, String recipe) {
         try {
+            String myDriver = "com.mysql.jdbc.Driver";
+            String myURL = "jdbc:mysql://mysql-recipull.crcqvo2k4dml.us-west-2.rds.amazonaws.com:3306/recipull_rds_db";
+            Class.forName(myDriver);
+            Connection conn = DriverManager.getConnection(myURL,"cs48_ajara","ajara2019");
+
             String query = "UPDATE recipes SET recipe_vote = ? WHERE recipe_name = ?";
             PreparedStatement preparedStmt = conn.prepareStatement(query);
             preparedStmt.setInt   (1, votes);
@@ -79,6 +200,7 @@ public class Driver {
                 
                 //System.out.format("%s, %s \n", selectedRecipe, recipeVotes);
             } 
+            // return string with vote number 
             // FIND A WAY TO UPDATE RECIPE OBJECT VOTE FIELD FROM HERE 
             // HOW ARE WE EVEN GOING TO ACCESS THE RECIPE OBJECT FROM THE CARD ALONE?
             st.close();
@@ -267,11 +389,49 @@ public class Driver {
 
             String finalOutput = "";
             for(Recipe x : orderedRecipes) {
-                finalOutput += "`"+x.getName()+"`"+x.getTags()+"`"+x.getURL()+"`"+x.getImgURL()+"`"+x.getDesc()+"`"+x.getNumIng()+" of your ingredients are included.|";
+                finalOutput += "`"+x.getName()+"`"+x.getTags()+"`"+x.getURL()+"`"+x.getImgURL()+"`"+x.getDesc()+"`"+x.getNumIng()+" of your ingredients are included."+"`"+x.getVotes()+"|";
             }
             if(finalOutput.length() > 1) {
                 finalOutput = finalOutput.substring(0, finalOutput.length()-1);
             }
+            //updateVote(8, "grilled cheese", conn);
+            s.close();
+            return finalOutput;
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+        return "No Recipes";
+    }
+
+    public String runAlexa(String ingredients) {
+        try {
+            String myDriver = "com.mysql.jdbc.Driver";
+            String myURL = "jdbc:mysql://mysql-recipull.crcqvo2k4dml.us-west-2.rds.amazonaws.com:3306/recipull_rds_db";
+            Class.forName(myDriver);
+            Connection conn = DriverManager.getConnection(myURL,"cs48_ajara","ajara2019");
+
+            ArrayList<Integer> ingIds = getIngredientId(ingredients, conn);
+            String ingIdList = getIngredientIdList(ingIds);
+
+            Integer numIng = ingIds.size();
+            String finalRecipes = getRecipeIdList(conn, numIng, ingIdList);
+            if(finalRecipes.compareTo("No Recipes") == 0) {
+                System.out.println("No recipes containing all "+numIng+" ingredients found.");
+                s.close();
+                return "No Recipes";
+            }
+            ArrayList<Recipe> recipeList = createRecipes(conn, finalRecipes);
+
+            ArrayList<Recipe> orderedRecipes = orderRecipes(recipeList, numIng);
+
+            String finalOutput = "";
+            for(Recipe x : orderedRecipes) {
+                finalOutput += "`"+x.getName()+"`"+x.getURL();
+            }
+            // if(finalOutput.length() > 1) {
+            //     finalOutput = finalOutput.substring(0, finalOutput.length()-1);
+            // }
             //updateVote(8, "grilled cheese", conn);
             s.close();
             return finalOutput;

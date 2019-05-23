@@ -28,6 +28,27 @@ body, html {
     cursor:pointer;
 }
 
+.upVoteBtn {
+  width:30px;
+  border:none;
+  background: #013D3E;
+  color: #fff;
+  padding: 7px 7px;
+  cursor: pointer; 
+}
+
+.downVoteBtn {
+  width:30px;
+  border:none;
+  background: #013D3E;
+  color: #fff;
+  padding: 7px 7px;
+  cursor: pointer; 
+}
+
+.vote {
+  padding:7px;
+}
 
 .card-header {
   height: 50%;
@@ -68,7 +89,7 @@ body, html {
 .date {
   font-size: 11px;
   font-weight: 600;
-  color:#001E9B;
+  color:#013D3E;
 }
 
 .body-content {

@@ -21,7 +21,7 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
+    <title>ReciPull</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
@@ -38,8 +38,10 @@
     -->
     <div id="recipes" style="visibility:hidden;"></div>
     <div id="ingredients" style="visibility:hidden;"></div>
+    <div id="vote" style="visibility:hidden;"></div>
+    <div id="filter" style="visibility:hidden;"></div>
     <script src="jquery-3.4.1.min.js"></script>
-    <script>
+    <script defer>
       $(document).ready(function(){
         //var ourInfo = document.getElementById("ingredients").innerHTML;
         //$("button[name='GetButton']").click(function(){
@@ -48,7 +50,7 @@
           $.ajax({
             type: 'GET',
             //url: 'http://csil-24.cs.ucsb.edu:8180/test/GetName',
-            url: 'http://localhost:8180/test/GetName',
+            url: 'http://localhost:8280/test/GetName',
             //url: 'http://localhost:3000/test/GetName',
             data: {  //send data here or remove this entire block
               'ID': document.getElementById("ingredients").innerHTML, 
@@ -72,7 +74,110 @@
             }
           });
         });
+        $("#root").on("click", "button[name='upVoteBtn']", function(){
+          function checkInner() {
+            if(document.getElementById("vote").innerHTML != "") {
+              $.ajax({
+                type: 'GET',
+                //url: 'http://csil-24.cs.ucsb.edu:8180/test/GetName',
+                url: 'http://localhost:8280/test/GetVote',
+                data: {  //send data here or remove this entire block
+                  'ID': document.getElementById("vote").innerHTML, 
+                },
+                dataType: 'json', //return type
+                error: function() {
+                  //alert("GetVote Error");
+                },
+                success: function(data){ 
+                  var items = [];
+                  console.log("Success");
+                  $.each( data, function( key, val ) {
+                  //document.getElementById("recipes").innerHTML = key;
+                  console.log(document.getElementById("vote").innerHTML);
+                  //console.log(document.getElementById("recipes").innerHTML); 
+                  //items.push( "<li>" + key + ":" + val + "</li>" );
+                  });
+                  $( "<ul/>", {
+                    "class": "data_list",
+                    html: items.join( "" )
+                  }).appendTo( "body" );
+                }
+              });
+            }
+          }
+          window.setTimeout(checkInner,0.0001);
+        });
+
+        $("#root").on("click", "button[name='downVoteBtn']", function(){
+          function checkInner() {
+            if(document.getElementById("vote").innerHTML != "") {
+              $.ajax({
+                type: 'GET',
+                //url: 'http://csil-24.cs.ucsb.edu:8180/test/GetName',
+                url: 'http://localhost:8280/test/GetVote',
+                data: {  //send data here or remove this entire block
+                  'ID': document.getElementById("vote").innerHTML, 
+                },
+                dataType: 'json', //return type
+                error: function() {
+                  //alert("GetVote Error");
+                },
+                success: function(data){ 
+                  var items = [];
+                  console.log("Success");
+                  $.each( data, function( key, val ) {
+                  //document.getElementById("recipes").innerHTML = key;
+                  console.log(document.getElementById("vote").innerHTML);
+                  //console.log(document.getElementById("recipes").innerHTML); 
+                  //items.push( "<li>" + key + ":" + val + "</li>" );
+                  });
+                  $( "<ul/>", {
+                    "class": "data_list",
+                    html: items.join( "" )
+                  }).appendTo( "body" );
+                }
+              });
+            }
+          }
+          window.setTimeout(checkInner,0.0001);
+        });
+
+        $("#root").on("click", "button[name='vegFilter']", function(){
+          function checkInner() {
+            if(document.getElementById("filter").innerHTML != "") {
+              console.log(document.getElementById("recipes").innerHTML);
+              $.ajax({
+                type: 'GET',
+                //url: 'http://csil-24.cs.ucsb.edu:8180/test/GetName',
+                url: 'http://localhost:8280/test/GetFilter',
+                data: {  //send data here or remove this entire block
+                  'ID': document.getElementById("recipes").innerHTML+"`"+getElementById("filter").innerHTML, 
+                },
+                dataType: 'json', //return type
+                error: function() {
+                  //alert("GetVote Error");
+                },
+                success: function(data){ 
+                  var items = [];
+                  console.log("Success");
+                  $.each( data, function( key, val ) {
+                  document.getElementById("recipes").innerHTML = key;
+                  //console.log(document.getElementById("filter").innerHTML);
+                  //console.log(document.getElementById("recipes").innerHTML); 
+                  //items.push( "<li>" + key + ":" + val + "</li>" );
+                  });
+                  $( "<ul/>", {
+                    "class": "data_list",
+                    html: items.join( "" )
+                  }).appendTo( "body" );
+                }
+              });
+            }
+          }
+          window.setTimeout(checkInner,0.0001);
+        });
       });
+
     </script>
   </body>
 </html>
