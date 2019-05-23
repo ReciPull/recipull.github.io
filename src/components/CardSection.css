@@ -1,0 +1,40 @@
+.outputButton {
+    width:400px;
+    border:none;
+    background: #555;
+    color: #fff;
+    padding: 7px 20px;
+    cursor: pointer; 
+}
+
+.leftFilter {
+    width:100px;
+    border-left:2px solid #013D3E;
+    border-right:2px solid #28948B;
+    background: #28948B;
+    color: #fff;
+    padding: 7px 20px;
+    cursor: pointer; 
+}
+
+.rightFilter {
+    width:100px;
+    border-left:2px solid #28948B;
+    border-right:2px solid #013D3E;
+    background: #28948B;
+    color: #fff;
+    padding: 7px 20px;
+    cursor: pointer; 
+}
+
+.inLine {
+    padding-top: 15px;
+    text-align:center;  
+}
+
+.outputButtonContainer {
+    margin-left:0px;
+    width:1100px;
+    text-align:center; 
+    justify-content: center;
+}

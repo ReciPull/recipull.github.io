@@ -12,6 +12,8 @@ public class Jetty extends Server {
         .NO_SESSIONS);
         context.setContextPath("/test");
         context.addServlet(new ServletHolder(new GetName()), "/GetName/*");
+        context.addServlet(new ServletHolder(new GetVote()), "/GetVote/*");
+        context.addServlet(new ServletHolder(new GetFilter()), "/GetFilter/*");
         context.addServlet(new ServletHolder(new GetNameAlexa()), "/GetNameAlexa/*");
         //context.addServlet(new ServletHolder(new SaveName()), "/SaveName/*");
         //context.addServlet(new ServletHolder(new SaveArray()), "/SaveArray/*");
