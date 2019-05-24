@@ -26,10 +26,10 @@ def testpost(posturl,val1,val2):
     
 
 def main():
-    url = 'http://localhost:8180/test/GetName'
+    url = 'http://localhost:8280/test/GetNameAlexa'
     testget(url,'foo')
-    url = 'http://localhost:8180/test/SaveName'
-    testpost(url,'name1','name2')
+    #url = 'http://localhost:8180/test/SaveName'
+    #testpost(url,'name1','name2')
 
 if __name__ == '__main__':
   main()
