@@ -49,8 +49,8 @@
           console.log(document.getElementById("ingredients").innerHTML);
           $.ajax({
             type: 'GET',
-            //url: 'http://csil-24.cs.ucsb.edu:8180/test/GetName',
-            url: 'http://localhost:8280/test/GetName',
+            url: 'http://csil-24.cs.ucsb.edu:8280/test/GetName',
+            //url: 'http://localhost:8280/test/GetName',
             //url: 'http://localhost:3000/test/GetName',
             data: {  //send data here or remove this entire block
               'ID': document.getElementById("ingredients").innerHTML, 
@@ -79,8 +79,8 @@
             if(document.getElementById("vote").innerHTML != "") {
               $.ajax({
                 type: 'GET',
-                //url: 'http://csil-24.cs.ucsb.edu:8180/test/GetName',
-                url: 'http://localhost:8280/test/GetVote',
+                url: 'http://csil-24.cs.ucsb.edu:8280/test/GetVote',
+                //url: 'http://localhost:8280/test/GetVote',
                 data: {  //send data here or remove this entire block
                   'ID': document.getElementById("vote").innerHTML, 
                 },
@@ -113,8 +113,8 @@
             if(document.getElementById("vote").innerHTML != "") {
               $.ajax({
                 type: 'GET',
-                //url: 'http://csil-24.cs.ucsb.edu:8180/test/GetName',
-                url: 'http://localhost:8280/test/GetVote',
+                url: 'http://csil-24.cs.ucsb.edu:8280/test/GetVote',
+                //url: 'http://localhost:8280/test/GetVote',
                 data: {  //send data here or remove this entire block
                   'ID': document.getElementById("vote").innerHTML, 
                 },
