@@ -427,8 +427,9 @@ public class Driver {
 
             String finalOutput = "";
             for(Recipe x : orderedRecipes) {
-                finalOutput += "`"+x.getName()+"`"+x.getURL();
+                finalOutput += ""+x.getName()+"`"+x.getURL()+"`";
             }
+            finalOutput = finalOutput.substring(0, finalOutput.length()-1);
             // if(finalOutput.length() > 1) {
             //     finalOutput = finalOutput.substring(0, finalOutput.length()-1);
             // }
