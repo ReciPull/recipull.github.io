@@ -9,60 +9,83 @@ describe('<IngredientSection />', () =>  {
 
     const comInst = component.instance();
 
-    it('adds Ingredients', () => {
+    var id1 = new String();
+    var id2 = new String();
+    var id3 = new String();
+    var id4 = new String();
+    var id5 = new String();
+    var id6 = new String();
+
+    var in1 = { id: "", title:"" };
+    var in2 = { id: "", title:"" };
+    var in3 = { id: "", title:"" };
+    var in4 = { id: "", title:"" };
+    var in5 = { id: "", title:"" };
+    var in6 = { id: "", title:"" };
+
+
+    it('adds Ingredients 1', () => {
         comInst.addIngredient("salt");
         comInst.addIngredient("pepper");
         comInst.addIngredient("sugar");
         expect(comInst.state.ingredientList[0].title).toEqual("salt");
+    });
+    it('adds Ingredients 2', () => {
         expect(comInst.state.ingredientList[1].title).toEqual("pepper");
+    });
+    it('adds Ingredients 3', () => {
         expect(comInst.state.ingredientList[2].title).toEqual("sugar");
     });
 
-    it('removes Ingredients', () => {
+    it('removes Ingredients 1', () => {
         
-        const id1 = comInst.state.ingredientList[0].id
-        const id2 = comInst.state.ingredientList[1].id
-        const id3 = comInst.state.ingredientList[2].id
+        id1 = comInst.state.ingredientList[0].id
+        id2 = comInst.state.ingredientList[1].id
+        id3 = comInst.state.ingredientList[2].id
 
-        const in1 = {
+        in1 = {
             id: id1,
             title: "salt"
         }
-        const in2 = {
+        in2 = {
             id: id2,
             title: "pepper"
         }
-        const in3 = {
+        in3 = {
             id: id3,
             title: "sugar"
         }
         comInst.delIngredient(id2);
         expect(comInst.state.ingredientList).toEqual([in1, in3]);
+    });
+    it('removes Ingredients 2', () => {
         comInst.delIngredient(id3);
         expect(comInst.state.ingredientList).toEqual([in1]);
+    });
+    it('removes Ingredients 3', () => {
         comInst.delIngredient(id1);
         expect(comInst.state.ingredientList).toEqual([]);
     });
 
     it('All Added', () => {
-        console.log("oof");
+
         comInst.addIngredient("salt");
         comInst.addIngredient("pepper");
         comInst.addIngredient("sugar");
 
-        const id4 = comInst.state.ingredientList[0].id
-        const id5 = comInst.state.ingredientList[1].id
-        const id6 = comInst.state.ingredientList[2].id
+        id4 = comInst.state.ingredientList[0].id
+        id5 = comInst.state.ingredientList[1].id
+        id6 = comInst.state.ingredientList[2].id
 
-        const in4 = {
+        in4 = {
             id: id4,
             title: "salt"
         }
-        const in5 = {
+        in5 = {
             id: id5,
             title: "pepper"
         }
-        const in6 = {
+        in6 = {
             id: id6,
             title: "sugar"
         }
