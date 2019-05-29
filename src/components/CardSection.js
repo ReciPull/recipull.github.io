@@ -8,12 +8,106 @@ import Cards from './Cards';
 class CardSection extends Component {
     state = {
         hasRecipes: 0, 
-        recipeList: [
-        ],
+        recipeList: [],
+        ogList: [],
+    }
+
+    sortByLunch = (e) => {
+        if (this.state.recipeList.length == 0) {
+            return;
+        }
+        else {
+            var recipes = this.state.ogList; 
+            console.log(recipes); 
+            var newRecipes = recipes.filter(recipe => recipe.tag.includes("lunch")); 
+            console.log(newRecipes); 
+            this.state.recipeList = newRecipes; 
+            this.setState({ recipeList: this.state.recipeList });
+        }
+    }
+
+    sortByBreakfast = (e) => {
+        if (this.state.recipeList.length == 0) {
+            return;
+        }
+        else {
+            var recipes = this.state.ogList; 
+            console.log(recipes); 
+            var newRecipes = recipes.filter(recipe => recipe.tag.includes("breakfast")); 
+            console.log(newRecipes); 
+            this.state.recipeList = newRecipes; 
+            this.setState({ recipeList: this.state.recipeList });
+        }
+    }
+
+    sortAlphabetically = (e) => {
+        if (this.state.recipeList.length == 0) {
+            return;
+        }
+        else {
+            var recipes = this.state.ogList; 
+            recipes.sort(function(a,b) {
+                if(a.title < b.title) { return -1; }
+                if(a.title > b.title) { return 1; }
+                return 0;
+            })
+            console.log(recipes); 
+            this.state.recipeList = recipes; 
+            this.setState({ recipeList: this.state.recipeList });
+        }
+    }
+
+    sortByVegan = (e) => {
+        if (this.state.recipeList.length == 0) {
+            return;
+        }
+        else {
+            var recipes = this.state.ogList; 
+            console.log(recipes); 
+            var newRecipes = recipes.filter(recipe => recipe.tag.includes("vegan")); 
+            console.log(newRecipes); 
+            this.state.recipeList = newRecipes; 
+            this.setState({ recipeList: this.state.recipeList });
+        }
+    }
+
+    sortByRating = (e) => {
+        if (this.state.recipeList.length == 0) {
+            return;
+        }
+        else {
+            var recipes = this.state.ogList; 
+            recipes.sort(function(a,b) {
+                if(a.numVotes < b.numVotes) { return 1; }
+                if(a.numVotes > b.numVotes) { return -1; }
+                return 0;
+            })
+            console.log(recipes); 
+            this.state.recipeList = recipes; 
+            this.setState({ recipeList: this.state.recipeList });
+        }
+    }
+
+    sortByDessert = (e) => {
+        if (this.state.recipeList.length == 0) {
+            return;
+        }
+        else {
+            var recipes = this.state.ogList; 
+            console.log(recipes); 
+            var newRecipes = recipes.filter(recipe => recipe.tag.includes("dessert")); 
+            console.log(newRecipes); 
+            this.state.recipeList = newRecipes; 
+            this.setState({ recipeList: this.state.recipeList });
+        }
     }
 
     addRecipe = (e) => {
-        if (document.getElementById("recipes").innerHTML === "") {
+        if (this.state.recipeList.length != 0) {
+            this.state.recipeList = this.state.ogList; 
+            this.setState({ recipeList: this.state.recipeList});
+        }
+        else if (document.getElementById("recipes").innerHTML === "") {
             return;
         }
         else if (document.getElementById("recipes").innerHTML === x) {
@@ -55,6 +149,9 @@ class CardSection extends Component {
                     var x = document.getElementById("recipes").innerHTML; 
                     document.getElementById("recipes").innerHTML = "";  
                 }
+                this.state.ogList = this.state.recipeList; 
+                this.setState({ ogList: this.state.ogList });
+                console.log(this.state.ogList); 
                 console.log("done");  
             }
         }  
@@ -63,13 +160,13 @@ class CardSection extends Component {
             return(
                 <div className="inLine">
                     <div className="outputButtonContainer">
-                        <button name="lunchFilter" className="leftFilter">Lunch</button>
-                        <button name="breakfastFilter" className="leftFilter">Breakfast</button>
-                        <button name="abcFilter" className="leftFilter">A-Z</button>
+                        <button onClick = {this.sortByLunch} name="lunchFilter" className="leftFilter">Lunch</button>
+                        <button onClick = {this.sortByBreakfast} name="breakfastFilter" className="leftFilter">Breakfast</button>
+                        <button onClick={this.sortAlphabetically} name="abcFilter" className="leftFilter">A-Z</button>
                         <button onClick={this.addRecipe} className="outputButton">Find My Recipes!</button>
-                        <button name="vegFilter" className="rightFilter">Vegan</button>
-                        <button name="voteFilter" className="rightFilter">Top-Rated</button>
-                        <button name="dessertFilter" className="rightFilter">Dessert</button>
+                        <button onClick = {this.sortByVegan} name="vegFilter" className="rightFilter">Vegan</button>
+                        <button onClick = {this.sortByRating} name="voteFilter" className="rightFilter">Top-Rated</button>
+                        <button onClick = {this.sortByDessert} name="dessertFilter" className="rightFilter">Dessert</button>
                     </div>
                     <br></br>
                     <Cards hasRecipes={this.state.hasRecipes} recipeList={this.state.recipeList}></Cards>
