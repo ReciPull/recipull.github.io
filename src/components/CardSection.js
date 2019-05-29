@@ -10,6 +10,7 @@ class CardSection extends Component {
         hasRecipes: 0, 
         recipeList: [],
         ogList: [],
+        inner: "", 
     }
 
     sortByLunch = (e) => {
@@ -103,7 +104,7 @@ class CardSection extends Component {
     }
 
     addRecipe = (e) => {
-        if (this.state.recipeList.length != 0) {
+        if (this.state.recipeList.length != 0 && document.getElementById("recipes").innerHTML === this.state.inner) {
             this.state.recipeList = this.state.ogList; 
             this.setState({ recipeList: this.state.recipeList});
         }
@@ -151,6 +152,8 @@ class CardSection extends Component {
                 }
                 this.state.ogList = this.state.recipeList; 
                 this.setState({ ogList: this.state.ogList });
+                this.state.inner = document.getElementById("recipes").innerHTML; 
+                this.setState({ inner: this.state.inner }); 
                 console.log(this.state.ogList); 
                 console.log("done");  
             }
