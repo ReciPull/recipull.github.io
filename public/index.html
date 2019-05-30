@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <!--<script src="https://use.fontawesome.com/f5ea91e308.js"></script>-->
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/recipull.ico" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
@@ -49,8 +49,8 @@
           console.log(document.getElementById("ingredients").innerHTML);
           $.ajax({
             type: 'GET',
-            url: 'http://csil-24.cs.ucsb.edu:8280/test/GetName',
-            //url: 'http://localhost:8280/test/GetName',
+            //url: 'http://csil-24.cs.ucsb.edu:8280/test/GetName',
+            url: 'http://localhost:8280/test/GetName',
             //url: 'http://localhost:3000/test/GetName',
             data: {  //send data here or remove this entire block
               'ID': document.getElementById("ingredients").innerHTML, 
@@ -79,8 +79,8 @@
             if(document.getElementById("vote").innerHTML != "") {
               $.ajax({
                 type: 'GET',
-                url: 'http://csil-24.cs.ucsb.edu:8280/test/GetVote',
-                //url: 'http://localhost:8280/test/GetVote',
+                //url: 'http://csil-24.cs.ucsb.edu:8280/test/GetVote',
+                url: 'http://localhost:8280/test/GetVote',
                 data: {  //send data here or remove this entire block
                   'ID': document.getElementById("vote").innerHTML, 
                 },
@@ -113,8 +113,8 @@
             if(document.getElementById("vote").innerHTML != "") {
               $.ajax({
                 type: 'GET',
-                url: 'http://csil-24.cs.ucsb.edu:8280/test/GetVote',
-                //url: 'http://localhost:8280/test/GetVote',
+                //url: 'http://csil-24.cs.ucsb.edu:8280/test/GetVote',
+                url: 'http://localhost:8280/test/GetVote',
                 data: {  //send data here or remove this entire block
                   'ID': document.getElementById("vote").innerHTML, 
                 },
@@ -142,7 +142,7 @@
           window.setTimeout(checkInner,0.0001);
         });
 
-        $("#root").on("click", "button[name='vegFilter']", function(){
+        /*$("#root").on("click", "button[name='vegFilter']", function(){
           function checkInner() {
             if(document.getElementById("filter").innerHTML != "") {
               console.log(document.getElementById("recipes").innerHTML);
@@ -175,7 +175,7 @@
             }
           }
           window.setTimeout(checkInner,0.0001);
-        });
+        });*/
       });
 
     </script>

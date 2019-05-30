@@ -1,11 +1,11 @@
 body, html {
   font-family: 'Montserrat', sans-serif;
-  background-color: #fff;
+  background-color: #F4F4F4;
 }
 
 .card {
   width:30%;
-  height:50%;
+  height:45%;
   display: block;
   margin: 60px auto;
   box-shadow: 10px 5px 40px 20px darken(#341cac, 5%);
@@ -26,8 +26,23 @@ body, html {
 }
 
 .button-primary:hover {
-    transform: translate(10px, 0);
+    transform: translate(0, 0);
     cursor:pointer;
+}
+
+.recipeSearch {
+  margin-top:-18px;
+  transition:.25s;
+}
+
+.recipeSearch:hover {
+  transform: translate(10px, 0);
+}
+
+.voteSect {
+  float:right;
+  margin-right:10px;
+  margin-top:20px;
 }
 
 .upVoteBtn {
@@ -39,6 +54,10 @@ body, html {
   cursor: pointer; 
 }
 
+.upVoteBtn:hover {
+  background: #C62D3A;
+}
+
 .downVoteBtn {
   width:30px;
   border:none;
@@ -46,6 +65,10 @@ body, html {
   color: #fff;
   padding: 7px 7px;
   cursor: pointer; 
+}
+
+.downVoteBtn:hover {
+  background: #C62D3A;
 }
 
 .vote {
@@ -60,6 +83,10 @@ body, html {
   background-size:cover;
   color:#174949;
   float: top;
+  border-top:1px solid #AAA;
+  border-left:1px solid #AAA;
+  border-right:1px solid #AAA;
+  border-radius:15px 15px 0px 0px;
 }
 
 .card-header--title {
@@ -71,18 +98,27 @@ body, html {
 .fullBody
 {
   height:100%;
-  
 }
 .linkButton
 {
   background-color:#28948B;
+  border-radius:0px 0px 15px 15px;
+}
+
+h2 {
+  font-family:'Raleway',sans-serif;
+  letter-spacing:0.8px;
+  color:#013D3E;
 }
 
 .card-body {
   padding: 15px;
-  height: 50%;
+  height: 45%;
   width: 100%;
-  background-color:#28948B;
+  background-color:#FFF;
+  border-top:5px solid #28948B;
+  border-left:1px solid #AAA;
+  border-right:1px solid #AAA;
   /* background-color:#F9FFFF; */
 
   overflow-y: auto;
@@ -94,22 +130,48 @@ body, html {
   color:#013D3E;
 }
 
+.tagSect {
+  width:100%;
+  padding:10px 7px 10px 7px;
+  color:#111;
+  margin-bottom:-1px;
+  border-top:2px solid #28948B;
+  border-left:1px solid #AAA;
+  border-right:1px solid #AAA;
+  font-family:'Raleway',sans-serif;
+  font-size:0.8vw;
+  text-transform:uppercase;
+  background-color:#FFF;
+}
+
 .body-content {
   padding-bottom: 40px;
   font-size: 13px;
   line-height: 1.8;
 }
 
+.descSect {
+  float:left;
+  text-align:left;
+  margin-top:15px;
+  width:75%;
+  padding:0px 10px 0px 5px;
+  border-right:1px dotted #111;
+}
+
 .button-primary {
   border: none;
   box-shadow: none;
-  background-color:transparent;
-  color: #E43544;
+  background-color:#C62D3A;
+  color: #FFF;
   font-size: 15px;
   transition:.25s;
   width:100%;
   padding: 15px;
-
+  border-bottom:1px solid #AAA;
+  border-left:1px solid #AAA;
+  border-right:1px solid #AAA;
+  border-radius:0px 0px 15px 15px;
   
 }
 

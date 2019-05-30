@@ -10,7 +10,7 @@ class CardHeader extends React.Component {
         };
         return (
         <header style={style} id={image} className="card-header">
-            <h4 className="card-header--title">{this.props.category}</h4>
+            
         </header>
         )
     }
@@ -20,7 +20,7 @@ class Button extends React.Component {
     render() {
         return (
         <button className="button button-primary">
-            <i className="fa fa-chevron-right"></i>See the Recipe
+            <i className="fa fa-chevron-right"></i><p className="recipeSearch" >See the Recipe</p>
         </button>
         )
     }
@@ -88,15 +88,16 @@ class CardBody extends React.Component {
 
                 <h2>{this.props.title}</h2>
                 
-                <p className="body-content">{this.props.text}</p>
-                <div>
+                <div className='descSect'><p className="body-content">{this.props.text}</p></div>
+                <div className='voteSect'>
                     <button name = 'upVoteBtn' className = 'upVoteBtn' onClick={this.upVote}> ↑ </button>
                     <div className='vote'>{this.state.numVotes}</div>
                     <button name='downVoteBtn' className = 'downVoteBtn' onClick={this.downVote}> ↓ </button>
-
                 </div>
                 
+                
             </div>
+            <div className='tagSect'>Tags: {this.props.category}</div>
             <div className="linkButton">
                 <a href={this.props.link}>
                 <Button />
@@ -112,7 +113,7 @@ class Card extends React.Component {
         return (
         <article className="card">
             <CardHeader category={this.props.category} image={this.props.image}/>
-            <CardBody link={this.props.link} numVotes={this.props.numVotes} numIngredients={this.props.numIngredients} date={this.props.date} title={this.props.title} text={this.props.text}/>
+            <CardBody link={this.props.link} numVotes={this.props.numVotes} numIngredients={this.props.numIngredients} date={this.props.date} title={this.props.title} text={this.props.text} category={this.props.category}/>
         </article>
         )
     }
