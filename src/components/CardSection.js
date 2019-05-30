@@ -10,6 +10,7 @@ class CardSection extends Component {
         hasRecipes: 0, 
         recipeList: [],
         ogList: [],
+        inner: "", 
     }
 
     sortByLunch = (e) => {
@@ -103,7 +104,7 @@ class CardSection extends Component {
     }
 
     addRecipe = (e) => {
-        if (this.state.recipeList.length != 0) {
+        if (this.state.recipeList.length != 0 && document.getElementById("recipes").innerHTML === this.state.inner) {
             this.state.recipeList = this.state.ogList; 
             this.setState({ recipeList: this.state.recipeList});
         }
@@ -151,6 +152,8 @@ class CardSection extends Component {
                 }
                 this.state.ogList = this.state.recipeList; 
                 this.setState({ ogList: this.state.ogList });
+                this.state.inner = document.getElementById("recipes").innerHTML; 
+                this.setState({ inner: this.state.inner }); 
                 console.log(this.state.ogList); 
                 console.log("done");  
             }
@@ -159,16 +162,18 @@ class CardSection extends Component {
     render() {
             return(
                 <div className="inLine">
-                    <div className="outputButtonContainer">
-                        <button onClick = {this.sortByLunch} name="lunchFilter" className="leftFilter">Lunch</button>
-                        <button onClick = {this.sortByBreakfast} name="breakfastFilter" className="leftFilter">Breakfast</button>
-                        <button onClick={this.sortAlphabetically} name="abcFilter" className="leftFilter">A-Z</button>
-                        <button onClick={this.addRecipe} className="outputButton">Find My Recipes!</button>
-                        <button onClick = {this.sortByVegan} name="vegFilter" className="rightFilter">Vegan</button>
-                        <button onClick = {this.sortByRating} name="voteFilter" className="rightFilter">Top-Rated</button>
-                        <button onClick = {this.sortByDessert} name="dessertFilter" className="rightFilter">Dessert</button>
+                    <div className="structure">
+                        <div className="outputButtonContainer">
+                            <button onClick = {this.sortByRating} name="voteFilter" className="leftFilter">Top-Rated</button>
+                            <button onClick={this.sortAlphabetically} name="abcFilter" className="leftFilter">A-Z</button>
+                            <button onClick = {this.sortByVegan} name="vegFilter" className="leftFilter">Vegan</button>
+                            <button onClick={this.addRecipe} className="outputButton">Find My Recipes!</button>
+                            <button onClick = {this.sortByBreakfast} name="breakfastFilter" className="rightFilter">Breakfast</button>
+                            <button onClick = {this.sortByLunch} name="lunchFilter" className="rightFilter">Lunch</button>
+                            <button onClick = {this.sortByDessert} name="dessertFilter" className="rightFilter">Dessert</button>
+                        </div>
                     </div>
-                    <br></br>
+                    
                     <Cards hasRecipes={this.state.hasRecipes} recipeList={this.state.recipeList}></Cards>
                 </div>
             )

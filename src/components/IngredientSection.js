@@ -62,12 +62,11 @@ class IngredientSection extends Component {
                     <Ingredients ingredientList = {this.state.ingredientList} delIngredient={this.delIngredient}/>
                 </div>
                 <div className = 'boxBot'>
-                    <button name = 'SearchBtn' className = 'SearchBtn'> Search Recipes </button>
+                    <button name = 'SearchBtn' className = 'SearchBtn'> Submit Ingredient List </button>
+                    <button className = 'clearBtn' onClick={this.clearAll}> Clear All </button>
                     
                 </div>
-                <div className = 'clearSection'>
-                        <p style={tail}>Add Ingredients Here <button className = 'clearBtn' onClick={this.clearAll}> Clear All </button></p>
-                </div>
+                
                 
             </div>
         )
@@ -75,8 +74,8 @@ class IngredientSection extends Component {
 }
 
 const tail = {
-        backgroundColor: '#f4f4f4',
-        height: 25,
+        backgroundColor: '#EEE',
+        height: 30,
         display: 'flex', justifyContent: 'center', alignItems: 'center'
 }
 
