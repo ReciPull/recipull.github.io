@@ -25,58 +25,77 @@ class Button extends React.Component {
         )
     }
 }
-
-/*class Voting extends React.Component { 
-    state = {
-        numVotes: 0, 
-    }
-
-    upVote = (e) => {
-        e.preventDefault(); 
-        this.state.numVotes = this.state.numVotes + 1; 
-        this.setState({numVotes: this.state.numVotes}); 
-    }
-
-    downVote = (e) => {
-        e.preventDefault(); 
-        this.state.numVotes = this.state.numVotes - 1; 
-        this.setState({numVotes: this.state.numVotes}); 
-    }
-
-    render() {
-        return(
-            <div>
-                <button onClick={this.upVote}>
-                    Upvote
-                </button>
-                <h>{this.state.numVotes}</h>
-                <button onClick={this.downVote}>
-                    Downvote
-                </button>
-            </div>
-        )
-    }
-}*/
   
 class CardBody extends React.Component {
     state = {
         numVotes: this.props.numVotes, 
+        hasUpvoted: false, 
+        hasDownvoted: false, 
     }
 
     upVote = (e) => {
         e.preventDefault(); 
-        this.state.numVotes = this.state.numVotes + 1; 
-        this.setState({numVotes: this.state.numVotes}); 
-        document.getElementById("vote").innerHTML = this.props.title + "`" + this.state.numVotes; 
-        console.log(document.getElementById("vote").innerHTML); 
+        if (this.state.hasUpvoted === false && this.state.hasDownvoted === false) {
+            this.state.numVotes = this.state.numVotes + 1; 
+            this.setState({numVotes: this.state.numVotes}); 
+            document.getElementById("vote").innerHTML = this.props.title + "`" + this.state.numVotes; 
+            console.log(document.getElementById("vote").innerHTML); 
+            this.state.hasUpvoted = true; 
+            this.setState({ hasUpvoted: this.state.hasUpvoted }); 
+        }
+        else if (this.state.hasUpvoted === true && this.state.hasDownvoted === false) {
+            this.state.numVotes = this.state.numVotes - 1; 
+            this.setState({numVotes: this.state.numVotes}); 
+            document.getElementById("vote").innerHTML = this.props.title + "`" + this.state.numVotes; 
+            console.log(document.getElementById("vote").innerHTML); 
+            this.state.hasUpvoted = false; 
+            this.setState({ hasUpvoted: this.state.hasUpvoted }); 
+        }
+        else if (this.state.hasUpvoted === false && this.state.hasDownvoted === true) {
+            this.state.numVotes = this.state.numVotes + 2; 
+            this.setState({numVotes: this.state.numVotes}); 
+            document.getElementById("vote").innerHTML = this.props.title + "`" + this.state.numVotes; 
+            console.log(document.getElementById("vote").innerHTML); 
+            this.state.hasUpvoted = true; 
+            this.setState({ hasUpvoted: this.state.hasUpvoted }); 
+            this.state.hasDownvoted = false; 
+            this.setState({ hasDownvoted: this.state.hasDownvoted }); 
+        }
     }
 
     downVote = (e) => {
+        // e.preventDefault(); 
+        // this.state.numVotes = this.state.numVotes - 1; 
+        // this.setState({numVotes: this.state.numVotes}); 
+        // document.getElementById("vote").innerHTML = this.props.title + "`" + this.state.numVotes;
+        // console.log(document.getElementById("vote").innerHTML);  
         e.preventDefault(); 
-        this.state.numVotes = this.state.numVotes - 1; 
-        this.setState({numVotes: this.state.numVotes}); 
-        document.getElementById("vote").innerHTML = this.props.title + "`" + this.state.numVotes;
-        console.log(document.getElementById("vote").innerHTML);  
+        if (this.state.hasDownvoted === false && this.state.hasUpvoted === false) {
+            this.state.numVotes = this.state.numVotes - 1; 
+            this.setState({numVotes: this.state.numVotes}); 
+            document.getElementById("vote").innerHTML = this.props.title + "`" + this.state.numVotes; 
+            console.log(document.getElementById("vote").innerHTML); 
+            this.state.hasDownvoted = true; 
+            this.setState({ hasDownvoted: this.state.hasDownvoted }); 
+        }
+        else if (this.state.hasDownvoted === true && this.state.hasUpvoted === false) {
+            this.state.numVotes = this.state.numVotes + 1; 
+            this.setState({numVotes: this.state.numVotes}); 
+            document.getElementById("vote").innerHTML = this.props.title + "`" + this.state.numVotes; 
+            console.log(document.getElementById("vote").innerHTML); 
+            this.state.hasDownvoted = false; 
+            this.setState({ hasDownvoted: this.state.hasDownvoted }); 
+        }
+        else if (this.state.hasDownvoted === false && this.state.hasUpvoted === true) {
+            this.state.numVotes = this.state.numVotes - 2; 
+            this.setState({numVotes: this.state.numVotes}); 
+            document.getElementById("vote").innerHTML = this.props.title + "`" + this.state.numVotes; 
+            console.log(document.getElementById("vote").innerHTML); 
+            this.state.hasDownvoted = true; 
+            this.setState({ hasDownvoted: this.state.hasDownvoted }); 
+            this.state.hasUpvoted = false; 
+            this.setState({ hasUpvoted: this.state.hasUpvoted }); 
+        }
     }
 
     render() {
