@@ -43,34 +43,24 @@
     <script src="jquery-3.4.1.min.js"></script>
     <script defer>
       $(document).ready(function(){
-        //var ourInfo = document.getElementById("ingredients").innerHTML;
-        //$("button[name='GetButton']").click(function(){
         $("button[name='SearchBtn']").click(function(){
           console.log(document.getElementById("ingredients").innerHTML);
           $.ajax({
             type: 'GET',
             //url: 'http://csil-24.cs.ucsb.edu:8280/test/GetName',
             url: 'http://localhost:8280/test/GetName',
-            //url: 'http://localhost:3000/test/GetName',
-            data: {  //send data here or remove this entire block
+            data: {  
               'ID': document.getElementById("ingredients").innerHTML, 
             },
-            dataType: 'json', //return type
+            dataType: 'json', 
             error: function() {
               alert("GetName Error");
             },
             success: function(data){ 
-              var items = [];
               $.each( data, function( key, val ) {
               document.getElementById("recipes").innerHTML = key;
-              // console.log(document.getElementById("recipes").innerHTML);
               console.log(document.getElementById("recipes").innerHTML); 
-              //items.push( "<li>" + key + ":" + val + "</li>" );
               });
-              $( "<ul/>", {
-                "class": "data_list",
-                html: items.join( "" )
-              }).appendTo( "body" );
             }
           });
         });
@@ -81,26 +71,14 @@
                 type: 'GET',
                 //url: 'http://csil-24.cs.ucsb.edu:8280/test/GetVote',
                 url: 'http://localhost:8280/test/GetVote',
-                data: {  //send data here or remove this entire block
+                data: {  
                   'ID': document.getElementById("vote").innerHTML, 
                 },
-                dataType: 'json', //return type
-                error: function() {
-                  //alert("GetVote Error");
-                },
+                dataType: 'json', 
                 success: function(data){ 
-                  var items = [];
-                  console.log("Success");
                   $.each( data, function( key, val ) {
-                  //document.getElementById("recipes").innerHTML = key;
                   console.log(document.getElementById("vote").innerHTML);
-                  //console.log(document.getElementById("recipes").innerHTML); 
-                  //items.push( "<li>" + key + ":" + val + "</li>" );
                   });
-                  $( "<ul/>", {
-                    "class": "data_list",
-                    html: items.join( "" )
-                  }).appendTo( "body" );
                 }
               });
             }
@@ -115,67 +93,20 @@
                 type: 'GET',
                 //url: 'http://csil-24.cs.ucsb.edu:8280/test/GetVote',
                 url: 'http://localhost:8280/test/GetVote',
-                data: {  //send data here or remove this entire block
+                data: {  
                   'ID': document.getElementById("vote").innerHTML, 
                 },
-                dataType: 'json', //return type
-                error: function() {
-                  //alert("GetVote Error");
-                },
+                dataType: 'json', 
                 success: function(data){ 
-                  var items = [];
-                  console.log("Success");
                   $.each( data, function( key, val ) {
-                  //document.getElementById("recipes").innerHTML = key;
                   console.log(document.getElementById("vote").innerHTML);
-                  //console.log(document.getElementById("recipes").innerHTML); 
-                  //items.push( "<li>" + key + ":" + val + "</li>" );
                   });
-                  $( "<ul/>", {
-                    "class": "data_list",
-                    html: items.join( "" )
-                  }).appendTo( "body" );
                 }
               });
             }
           }
           window.setTimeout(checkInner,0.0001);
         });
-
-        /*$("#root").on("click", "button[name='vegFilter']", function(){
-          function checkInner() {
-            if(document.getElementById("filter").innerHTML != "") {
-              console.log(document.getElementById("recipes").innerHTML);
-              $.ajax({
-                type: 'GET',
-                //url: 'http://csil-24.cs.ucsb.edu:8180/test/GetName',
-                url: 'http://localhost:8280/test/GetFilter',
-                data: {  //send data here or remove this entire block
-                  'ID': document.getElementById("recipes").innerHTML+"`"+getElementById("filter").innerHTML, 
-                },
-                dataType: 'json', //return type
-                error: function() {
-                  //alert("GetVote Error");
-                },
-                success: function(data){ 
-                  var items = [];
-                  console.log("Success");
-                  $.each( data, function( key, val ) {
-                  document.getElementById("recipes").innerHTML = key;
-                  //console.log(document.getElementById("filter").innerHTML);
-                  //console.log(document.getElementById("recipes").innerHTML); 
-                  //items.push( "<li>" + key + ":" + val + "</li>" );
-                  });
-                  $( "<ul/>", {
-                    "class": "data_list",
-                    html: items.join( "" )
-                  }).appendTo( "body" );
-                }
-              });
-            }
-          }
-          window.setTimeout(checkInner,0.0001);
-        });*/
       });
 
     </script>

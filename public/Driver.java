@@ -14,35 +14,7 @@ public class Driver {
             temp.add(x);
         Collections.sort(temp, new AlphabetizeOrder());
         return temp;
-        // maybe clicking on filter pulls from recipes innerHTML and sends string, then parse through to re-make recipes, then access name area and return re-sorted string
     }
-    /*
-    public String alphabetize(String recipeString) {
-        ArrayList<Recipe> original = new ArrayList<Recipe>();
-
-        String[] recipes = recipeString.split("|");
-        for(String x : recipes) {
-            String[] fields = x.split("`");
-            Recipe r = new Recipe();
-            r.setName(fields[0]);
-            String[] tags = fields[1].split(", ");
-            for(String t : tags) 
-                r.addTag(t);
-            r.setURL(fields[2]);
-            r.setImgURL(fields[3]);
-            r.setDesc(fields[4]);
-            r.setNumIng(Integer.parseInt(fields[5]));
-            original.add(r);
-        }
-        Collections.sort(original, new AlphabetizeOrder());
-
-        String taggedOutput = "";
-        for(Recipe x : original) {
-            taggedOutput += "`"+x.getName()+"`"+x.getTags()+"`"+x.getURL()+"`"+x.getImgURL()+"`"+x.getDesc()+"`"+x.getNumIng()+" of your ingredients are included.|";
-        }
-        return taggedOutput;
-    }
-    */
 
     public ArrayList<Recipe> sortByVote(ArrayList<Recipe> initRecipes) {
         ArrayList<Recipe> temp = new ArrayList<Recipe>();
@@ -50,63 +22,7 @@ public class Driver {
             temp.add(x);
         Collections.sort(temp, new NumericalOrder());
         return temp;
-        // maybe clicking on filter pulls from recipes innerHTML and sends string, then parse through to re-make recipes, then access votes area and return re-sorted string
-            // so argument would be a string instead (d.sortByVote(whatever.innerHTML))
     }
-
-    /*
-    public String getTaggedRecipes(String recipeString) {
-        ArrayList<Recipe> original = new ArrayList<Recipe>();
-
-        String[] recipes = recipeString.split("|");
-        for(String x : recipes) {
-            String[] fields = x.split("`");
-            Recipe r = new Recipe();
-            r.setName(fields[0]);
-            String[] tags = fields[1].split(", ");
-            for(String t : tags) 
-                r.addTag(t);
-            r.setURL(fields[2]);
-            r.setImgURL(fields[3]);
-            r.setDesc(fields[4]);
-            r.setNumIng(Integer.parseInt(fields[5]));
-            original.add(r);
-        }
-
-        try {
-            String myDriver = "com.mysql.jdbc.Driver";
-            String myURL = "jdbc:mysql://mysql-recipull.crcqvo2k4dml.us-west-2.rds.amazonaws.com:3306/recipull_rds_db";
-            Class.forName(myDriver);
-            Connection conn = DriverManager.getConnection(myURL,"cs48_ajara","ajara2019");
-
-            for(Recipe x : original) {
-                String query = "SELECT recipes.recipe_vote FROM recipes WHERE recipe_id = "+x.getName()+";";
-
-                Statement st = conn.createStatement();
-                ResultSet rs = st.executeQuery(query);
-
-                int recipeVotes = 0;
-
-                while (rs.next()) {
-                    recipeVotes = rs.getInt("recipe_vote");
-                    x.setVotes(recipeVotes);
-                } 
-            }
-            st.close();
-        } catch (Exception e) {
-            System.err.println("Got an exception! ");
-            System.err.println(e.getMessage());
-        }
-
-        Collections.sort(original, new NumericalOrder());
-
-        String taggedOutput = "";
-        for(Recipe x : original) {
-            taggedOutput += "`"+x.getName()+"`"+x.getTags()+"`"+x.getURL()+"`"+x.getImgURL()+"`"+x.getDesc()+"`"+x.getNumIng()+" of your ingredients are included.|";
-        }
-        return taggedOutput;
-    }
-    */
 
     public ArrayList<Recipe> getTaggedRecipes(String tagName, ArrayList<Recipe> initRecipes) {
         ArrayList<Recipe> finalRecipes = new ArrayList<Recipe>();
@@ -117,45 +33,8 @@ public class Driver {
                 finalRecipes.add(x);
             }
         }
-        // caller must check if arrayList is empty
         return finalRecipes;
-        // maybe clicking on filter pulls from recipes innerHTML and sends string, then parse through to re-make recipes, then access votes area and return re-sorted string
     }
-
-    /*
-    public String getTaggedRecipes(String tagName, String recipeString) {
-        ArrayList<Recipe> original = new ArrayList<Recipe>();
-
-        String[] recipes = recipeString.split("|");
-        for(String x : recipes) {
-            String[] fields = x.split("`");
-            Recipe r = new Recipe();
-            r.setName(fields[0]);
-            String[] tags = fields[1].split(", ");
-            for(String t : tags) 
-                r.addTag(t);
-            r.setURL(fields[2]);
-            r.setImgURL(fields[3]);
-            r.setDesc(fields[4]);
-            r.setNumIng(Integer.parseInt(fields[5]));
-            original.add(r);
-        }
-        ArrayList<Recipe> finalRecipes = new ArrayList<Recipe>();
-        boolean isTagged = false;
-        for(Recipe x : original) {
-            isTagged = x.checkTags(tagName);
-            if(isTagged) {
-                finalRecipes.add(x);
-            }
-        }
-
-        String taggedOutput = "";
-        for(Recipe x : finalRecipes) {
-            taggedOutput += "`"+x.getName()+"`"+x.getTags()+"`"+x.getURL()+"`"+x.getImgURL()+"`"+x.getDesc()+"`"+x.getNumIng()+" of your ingredients are included.|";
-        }
-        return taggedOutput;
-    }
-    */
 
     public void setNumIngData(int numIng, int recipeId, Connection conn) {
         try {
@@ -196,13 +75,7 @@ public class Driver {
             while (rs.next()) {
                 selectedRecipe = rs.getString("recipe_name");
                 recipeVotes = rs.getInt("recipe_vote");
-
-                
-                //System.out.format("%s, %s \n", selectedRecipe, recipeVotes);
             } 
-            // return string with vote number 
-            // FIND A WAY TO UPDATE RECIPE OBJECT VOTE FIELD FROM HERE 
-            // HOW ARE WE EVEN GOING TO ACCESS THE RECIPE OBJECT FROM THE CARD ALONE?
             st.close();
         } catch (Exception e) {
             System.err.println("Got an exception! ");
@@ -221,7 +94,6 @@ public class Driver {
 
             while (rs.next()) {
                 ing.add(rs.getInt("ingredient_id"));
-                
                 counter++;
             } 
 
@@ -394,7 +266,6 @@ public class Driver {
             if(finalOutput.length() > 1) {
                 finalOutput = finalOutput.substring(0, finalOutput.length()-1);
             }
-            //updateVote(8, "grilled cheese", conn);
             s.close();
             return finalOutput;
         } catch (Exception e) {
@@ -430,10 +301,7 @@ public class Driver {
                 finalOutput += ""+x.getName()+"`"+x.getURL()+"`";
             }
             finalOutput = finalOutput.substring(0, finalOutput.length()-1);
-            // if(finalOutput.length() > 1) {
-            //     finalOutput = finalOutput.substring(0, finalOutput.length()-1);
-            // }
-            //updateVote(8, "grilled cheese", conn);
+
             s.close();
             return finalOutput;
         } catch (Exception e) {
