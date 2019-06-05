@@ -1,4 +1,3 @@
-import java.util.TreeMap;
 import java.util.HashMap;
 import java.util.ArrayList;
 
@@ -7,8 +6,6 @@ public class Recipe implements Comparable<Recipe>{
     private String url;
     private String imgUrl;
     private String description;
-    private TreeMap<String, Integer> ingredients;
-    private int numIngr;
     private int votes;
     private int numIng;
     private HashMap<String, Boolean> tags;
@@ -21,8 +18,7 @@ public class Recipe implements Comparable<Recipe>{
         this.description = "";
         this.votes = 0;
         this.numIng = 0;
-        ingredients = new TreeMap<String, Integer>();
-        tags = new HashMap<String, Boolean>();
+        this.tags = new HashMap<String, Boolean>();
     }
 
     //Setters
@@ -49,10 +45,6 @@ public class Recipe implements Comparable<Recipe>{
         return tagNames;
     }
 
-    public void addIngredient(String n, int f){
-        ingredients.put(n, f);
-    }
-
     public boolean checkTags(String tagName) {
         for(String key : tags.keySet()) {
             if(key.equals(tagName)) {
@@ -62,26 +54,8 @@ public class Recipe implements Comparable<Recipe>{
         return false;
     }
 
-    public void calculateFreq(){
-        //for(int f : ingredients.values()){
-        //    freq += f;
-        //}
-    }
     public void addTag(String t){
         tags.put(t, true);
-    }
-
-    public int getNumIngr(){
-        return numIngr;
-    }
-
-    public TreeMap<String,Integer> returnIngr(){
-        return ingredients;
-    }
-
-    public void printOutput() {
-        System.out.println("Recipe Name: " + name);
-        System.out.println("Description: " + description);
     }
 
     public int compareTo(Recipe other){

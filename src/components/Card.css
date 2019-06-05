@@ -21,7 +21,6 @@ body, html {
 .card:hover {
     box-shadow: 10px 5px 40px 20px darken(#341cac, 10%);
     cursor:pointer;
-    /* height:500px; */
     width:350px;
 }
 
@@ -119,8 +118,6 @@ h2 {
   border-top:5px solid #28948B;
   border-left:1px solid #AAA;
   border-right:1px solid #AAA;
-  /* background-color:#F9FFFF; */
-
   overflow-y: auto;
 }
 

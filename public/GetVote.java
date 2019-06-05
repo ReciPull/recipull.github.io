@@ -24,7 +24,6 @@ public class GetVote extends HttpServlet {
         int vote = Integer.parseInt(vals[1]);
         Driver d = new Driver();
         d.updateVote(vote, recipe);
-        //retVal.addProperty(s, "final value");
         try {
             response.setStatus(HttpServletResponse.SC_OK);
  
@@ -35,7 +34,6 @@ public class GetVote extends HttpServlet {
             response.addHeader("Access-Control-Allow-Origin", "*");
             //response.setContentType("text/html;charset=UTF-8");
             response.setContentType("application/json; charset=utf-8");
-            //response.getWriter().println(retVal);
             response.getWriter().close();
         }
     }
