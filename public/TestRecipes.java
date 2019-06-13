@@ -53,7 +53,7 @@ public class TestRecipes {
 
     @Test 
     public void testNoRecipes() {
-        String ingIdList = "20";
+        String ingIdList = "0";
         String recipeList = d.getRecipeIdList(conn, (Integer)1, ingIdList);
         ArrayList<Recipe> recipeOutput = new ArrayList<Recipe>();
         recipeOutput = d.createRecipes(conn, recipeList);
