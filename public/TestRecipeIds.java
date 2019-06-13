@@ -27,7 +27,7 @@ public class TestRecipeIds {
     public void testMultIngredient() {
         String ingIdList = "25, 26, 57";
         String recipeList = d.getRecipeIdList(conn, (Integer)3, ingIdList);
-        assertEquals("4, 6, 3, 8, 1, 2, 5, 7, 9", recipeList);
+        assertEquals("4, 6, 3, 8, 14, 17, 21, 24, 34, 36, 1, 2, 5, 7, 9, 10, 11, 13, 16, 19, 22, 25, 26, 27, 28, 30, 33, 35", recipeList);
     }
 
     @Test 
@@ -39,7 +39,7 @@ public class TestRecipeIds {
 
     @Test 
     public void testNoRecipes() {
-        String ingIdList = "20";
+        String ingIdList = "0";
         String recipeList = d.getRecipeIdList(conn, (Integer)1, ingIdList);
         assertEquals("No Recipes", recipeList);
     }
