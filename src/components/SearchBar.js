@@ -57,6 +57,7 @@ const bar = {
 }
 const sub = {
     display: 'flex',
-    width: '25%'
+    width: '25%',
+    innerHeight: '100%',
 }
 export default SearchBar
