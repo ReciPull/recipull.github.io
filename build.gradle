@@ -6,6 +6,7 @@ repositories {
 
 dependencies {
 	testCompile 'junit:junit:4.12'
+    compile 'com.github.jsimone:webapp-runner:8.5.11.3'
 }
 
 mainClassName = 'SimpleApp'
